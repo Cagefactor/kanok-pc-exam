@@ -594,6 +594,18 @@
             }
         }
 
+        function sendResultToGoogleSheets(data) {
+            const webAppUrl = "https://script.google.com/macros/s/AKfycbwPWwbHGIduqTRt323wAUm0AuD7Ru1CqIJuZubBHIdM7kWnYJNQP1rbIV9PjZssL7Gu/exec";
+            fetch(webAppUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).catch(err => console.error('Error sending to sheet:', err));
+        }
+
         function submitExam() {
             if (timerInterval) clearInterval(timerInterval);
 
@@ -608,6 +620,7 @@
             const timeUsedSecs = 3600 - timeRemaining;
             const minsUsed = Math.floor(timeUsedSecs / 60);
             const secsUsed = timeUsedSecs % 60;
+            const timeUsedStr = `${minsUsed}น. ${secsUsed}ว.`;
 
             let tier = "";
             let tierColorClass = "";
@@ -644,7 +657,18 @@
             document.getElementById('percentage-val').textContent = `${percentage.toFixed(1)}%`;
             document.getElementById('correct-count-val').textContent = `${score} ข้อ`;
             document.getElementById('wrong-count-val').textContent = `${50 - score} ข้อ`;
-            document.getElementById('time-used-val').textContent = `${minsUsed}น. ${secsUsed}ว.`;
+            document.getElementById('time-used-val').textContent = timeUsedStr;
+
+            // Send result data automatically to Google Sheets
+            sendResultToGoogleSheets({
+                name: userInfo.name,
+                id: userInfo.id,
+                branch: userInfo.branch,
+                score: `${score}/50`,
+                percentage: `${percentage.toFixed(1)}%`,
+                tier: tier,
+                timeUsed: timeUsedStr
+            });
 
             renderAnswerKey();
 
