@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบคลังข้อสอบและประเมินผล PC - วิศวกรรมระบบน้ำเกษตร (100 ข้อ)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Kanit Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Kanit', sans-serif; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-emerald-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="bg-white text-emerald-800 p-2 rounded-lg font-bold text-xl shadow">
+          <i class="fa-solid font-bold fa-faucet-drip"></i> KP
+        </div>
+        <div>
+          <h1 class="text-lg md:text-xl font-bold leading-tight">ระบบสอบประเมินผลพนักงาน PC - วิศวกรรมระบบน้ำเกษตร</h1>
+          <p class="text-xs text-emerald-200">Kanok Product & Agricultural Water Engineering Standard Exam (100 Advanced Questions)</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-2 text-sm">
+        <span class="bg-emerald-700 text-emerald-100 px-3 py-1.5 rounded-full font-medium">
+          <i class="fa-solid fa-users mr-1"></i> รองรับพนักงาน 70 สาขา
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="bg-white border-b border-slate-200 shadow-sm sticky top-[60px] z-40">
+    <div class="max-w-7xl mx-auto px-4 flex space-x-2 md:space-x-8 overflow-x-auto text-sm font-medium">
+      <button onclick="switchTab('exam-tab')" id="nav-exam-tab" class="tab-btn py-3 px-3 border-b-2 border-emerald-600 text-emerald-700 flex items-center gap-2 whitespace-nowrap">
+        <i class="fa-solid fa-pen-to-square"></i> โหมดทำข้อสอบสุ่ม 50 ข้อ
+      </button>
+      <button onclick="switchTab('bank-tab')" id="nav-bank-tab" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap">
+        <i class="fa-solid fa-book-open"></i> คลังเฉลยข้อสอบทั้งหมด (100 ข้อ)
+      </button>
+      <button onclick="switchTab('tier-tab')" id="nav-tier-tab" class="tab-btn py-3 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 whitespace-nowrap">
+        <i class="fa-solid fa-chart-line"></i> เกณฑ์จัดกลุ่มคะแนน (Starter / Advance / Pro)
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+    <!-- ==================== TAB 1: EXAM MODE ==================== -->
+    <section id="exam-tab" class="tab-content block">
+      
+      <!-- Start Exam Intro Card -->
+      <div id="exam-start-card" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 max-w-3xl mx-auto text-center">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-2xl mb-4">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-slate-800 mb-2">การสอบประเมินผลความรู้ระบบน้ำเกษตร (50 ข้อ)</h2>
+        <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+          ระบบจะทำการ **สุ่มข้อสอบ 50 ข้อ จากคลัง 100 ข้อ** แบบไม่ซ้ำกันในแต่ละบุคคล ครอบคลุมทั้งสเปกสินค้ากนกโปรดักส์ การคำนวณไฮดรอลิกส์ ปั๊ม ท่อ สปริงเกอร์ และระบบวาล์วอัตโนมัติ
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-left text-sm">
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="text-slate-500 text-xs font-semibold">จำนวนข้อสอบ</div>
+            <div class="text-lg font-bold text-slate-800">50 ข้อ (สุ่มจาก 100)</div>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="text-slate-500 text-xs font-semibold">เวลาในการทำ</div>
+            <div class="text-lg font-bold text-slate-800">60 นาที</div>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="text-slate-500 text-xs font-semibold">ระดับความยาก</div>
+            <div class="text-lg font-bold text-rose-600">วิศวกรรมขั้นสูง (Advanced)</div>
+          </div>
+        </div>
+
+        <button onclick="startExam()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition-all duration-200 flex items-center justify-center gap-2 mx-auto">
+          <i class="fa-solid fa-play"></i> เริ่มต้นทำข้อสอบสุ่ม 50 ข้อ
+        </button>
+      </div>
+
+      <!-- Exam Active UI (Hidden Initially) -->
+      <div id="exam-active-ui" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <!-- Left: Question Area -->
+        <div class="lg:col-span-3 space-y-6">
+          
+          <!-- Exam Progress Banner -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-wrap justify-between items-center gap-4">
+            <div>
+              <span id="current-cat-badge" class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-1 rounded-md font-semibold">หมวดหมู่</span>
+              <h3 id="current-q-title" class="font-bold text-slate-800 text-base mt-1">ข้อที่ 1 / 50</h3>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="text-right">
+                <div class="text-xs text-slate-500">เวลาคงเหลือ</div>
+                <div id="exam-timer" class="text-lg font-bold font-mono text-rose-600">60:00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question Content Card -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <p id="q-text" class="text-slate-800 font-medium text-lg leading-relaxed mb-6">ข้อความคำถาม...</p>
+
+            <div id="q-options" class="space-y-3">
+              <!-- Options injected by JS -->
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="flex justify-between items-center mt-8 pt-4 border-t border-slate-100">
+              <button onclick="prevQuestion()" id="btn-prev" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-medium text-sm transition disabled:opacity-50">
+                <i class="fa-solid fa-arrow-left mr-1"></i> ข้อก่อนหน้า
+              </button>
+
+              <button onclick="toggleFlag()" id="btn-flag" class="px-4 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg font-medium text-sm transition">
+                <i class="fa-solid fa-flag mr-1"></i> ติดธงทบทวน
+              </button>
+
+              <button onclick="nextQuestion()" id="btn-next" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium text-sm transition">
+                ข้อถัดไป <i class="fa-solid fa-arrow-right ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Question Palette & Submit -->
+        <div class="lg:col-span-1 space-y-4">
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4">
+            <h4 class="font-bold text-slate-800 text-sm mb-3">ผังข้อสอบ (50 ข้อ)</h4>
+            <div id="q-palette" class="grid grid-cols-5 gap-2 max-h-[350px] overflow-y-auto custom-scrollbar p-1">
+              <!-- Palette items injected by JS -->
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 text-xs space-y-2 text-slate-600">
+              <div class="flex items-center gap-2"><span class="w-3 h-3 bg-emerald-600 rounded"></span> ทำแล้ว</div>
+              <div class="flex items-center gap-2"><span class="w-3 h-3 bg-slate-200 rounded"></span> ยังไม่ได้ทำ</div>
+              <div class="flex items-center gap-2"><span class="w-3 h-3 bg-amber-400 rounded"></span> ติดธงทบทวน</div>
+            </div>
+
+            <button onclick="confirmSubmitExam()" class="w-full mt-6 bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl shadow transition text-sm">
+              <i class="fa-solid fa-check-circle mr-1"></i> ส่งข้อสอบและประเมินผล
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Exam Result Dashboard (Hidden Initially) -->
+      <div id="exam-result-ui" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+          <div class="text-center max-w-xl mx-auto mb-8">
+            <span id="res-badge" class="inline-block px-4 py-1.5 rounded-full text-sm font-bold mb-3">กลุ่มระดับ...</span>
+            <h2 id="res-score-text" class="text-4xl font-extrabold text-slate-800 mb-2">คะแนน 0 / 50</h2>
+            <p id="res-percent-text" class="text-lg text-slate-600 font-medium">(0%)</p>
+            <p id="res-desc-text" class="text-slate-500 text-sm mt-2 leading-relaxed"></p>
+          </div>
+
+          <!-- Category Performance Breakdown -->
+          <h3 class="font-bold text-slate-800 mb-4 border-b pb-2">ผลการประเมินแยกตามหมวดวิชา</h3>
+          <div id="cat-breakdown" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Inject breakdown bars -->
+          </div>
+
+          <div class="mt-8 text-center flex justify-center gap-4">
+            <button onclick="resetExam()" class="px-6 py-2.5 bg-emerald-600 text-white font-medium rounded-xl hover:bg-emerald-700 transition">
+              <i class="fa-solid fa-rotate-right mr-1"></i> ทำข้อสอบชุดใหม่ (สุ่ม 50 ข้อใหม่)
+            </button>
+            <button onclick="switchTab('bank-tab')" class="px-6 py-2.5 bg-slate-100 text-slate-700 font-medium rounded-xl hover:bg-slate-200 transition">
+              <i class="fa-solid fa-book mr-1"></i> ดูเฉลยละเอียดคลังข้อสอบทั้งหมด
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== TAB 2: QUESTION BANK (100 QUESTIONS) ==================== -->
+    <section id="bank-tab" class="tab-content hidden space-y-6">
+      
+      <!-- Filter and Search Bar -->
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 flex flex-wrap gap-4 items-center justify-between">
+        <div class="flex-1 min-w-[280px]">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
+            <input type="text" id="bank-search" oninput="filterQuestionBank()" placeholder="ค้นหาคำถาม, ผลิตภัณฑ์, สมการ หรือคำสำคัญ (เช่น Hazen, NPSH, สปริงเกอร์, PRV)..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <select id="bank-cat-filter" onchange="filterQuestionBank()" class="bg-slate-50 border border-slate-200 rounded-lg text-sm px-3 py-2 text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="all">ทุกหมวดหมู่ (100 ข้อ)</option>
+            <option value="cat1">หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์</option>
+            <option value="cat2">หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน</option>
+            <option value="cat3">หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม</option>
+            <option value="cat4">หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ</option>
+          </select>
+          <button onclick="window.print()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+            <i class="fa-solid fa-print mr-1"></i> พิมพ์ / พิมพ์เป็น PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Question List Container -->
+      <div id="question-bank-list" class="space-y-4">
+        <!-- 100 questions injected by JS -->
+      </div>
+
+    </section>
+
+    <!-- ==================== TAB 3: TIER & GROUPING GUIDE ==================== -->
+    <section id="tier-tab" class="tab-content hidden space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+        <h2 class="text-xl font-bold text-slate-800 mb-2">เกณฑ์การวัดผลและจัดกลุ่มพนักงาน PC (70 สาขา)</h2>
+        <p class="text-slate-600 text-sm mb-6">เกณฑ์ประเมินความรู้จากแบบทดสอบวิศวกรรมระบบน้ำเกษตร 50 ข้อ เพื่อจำแนกความสามารถและวางแผนการอบรมพัฒนาบุคคล</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Starter / Beginner -->
+          <div class="border-2 border-amber-200 bg-amber-50/50 rounded-2xl p-6 relative">
+            <span class="bg-amber-100 text-amber-800 font-bold text-xs px-3 py-1 rounded-full uppercase">ระดับที่ 1</span>
+            <h3 class="text-xl font-bold text-amber-900 mt-2 mb-1">Starter / Beginner</h3>
+            <div class="text-2xl font-extrabold text-amber-600 mb-4">คะแนน < 60% <span class="text-sm font-normal text-slate-500">(น้อยกว่า 30 ข้อ)</span></div>
+            <p class="text-slate-700 text-xs leading-relaxed mb-4">
+              มีความรู้พื้นฐานเกี่ยวกับชื่ออุปกรณ์ และสเปกสินค้าหลัก แต่ยังขาดความเข้าใจในการคำนวณด้านไฮดรอลิกส์ การอ่านกราฟปั๊ม และการแก้ปัญหาหน้างาน
+            </p>
+            <div class="border-t border-amber-200 pt-3">
+              <span class="font-bold text-xs text-amber-900">แนวทางพัฒนา:</span>
+              <ul class="text-xs text-slate-600 list-disc pl-4 space-y-1 mt-1">
+                <li>เข้าอบรมคอร์สพื้นฐานการเลือกใช้ท่อและข้อต่อกนกโปรดักส์</li>
+                <li>ฝึกใช้ตารางสำเร็จรูปสำหรับการเลือกสปริงเกอร์และปั๊มน้ำ</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Advance -->
+          <div class="border-2 border-blue-200 bg-blue-50/50 rounded-2xl p-6 relative">
+            <span class="bg-blue-100 text-blue-800 font-bold text-xs px-3 py-1 rounded-full uppercase">ระดับที่ 2</span>
+            <h3 class="text-xl font-bold text-blue-900 mt-2 mb-1">Advance</h3>
+            <div class="text-2xl font-extrabold text-blue-600 mb-4">60% - 84% <span class="text-sm font-normal text-slate-500">(30 - 42 ข้อ)</span></div>
+            <p class="text-slate-700 text-xs leading-relaxed mb-4">
+              เข้าใจหลักการออกแบบระบบน้ำพืชสวน สามารถคำนวณขนาดท่อ เลือกปั๊มน้ำ อ่านกราฟปั๊ม และแนะนำชุดวาล์วอัตโนมัติเบื้องต้นให้เกษตรกรได้อย่างถูกต้อง
+            </p>
+            <div class="border-t border-blue-200 pt-3">
+              <span class="font-bold text-xs text-blue-900">แนวทางพัฒนา:</span>
+              <ul class="text-xs text-slate-600 list-disc pl-4 space-y-1 mt-1">
+                <li>เสริมทักษะการออกแบบระบบกรองอุตสาหกรรม (Hydrocyclone/Automatic Backwash)</li>
+                <li>ฝึกการคำนวณแรงดันค้อนน้ำ (Water Hammer) และการประยุกต์ใช้ PRV</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Professional -->
+          <div class="border-2 border-emerald-300 bg-emerald-50/50 rounded-2xl p-6 relative">
+            <span class="bg-emerald-200 text-emerald-900 font-bold text-xs px-3 py-1 rounded-full uppercase">ระดับที่ 3</span>
+            <h3 class="text-xl font-bold text-emerald-900 mt-2 mb-1">Professional</h3>
+            <div class="text-2xl font-extrabold text-emerald-600 mb-4">85% - 100% <span class="text-sm font-normal text-slate-500">(43 - 50 ข้อ)</span></div>
+            <p class="text-slate-700 text-xs leading-relaxed mb-4">
+              ผู้เชี่ยวชาญระดับวิศวกรระบบน้ำ สามารถคำนวณไฮดรอลิกส์เชิงซ้อน ออกแบบแปลงเกษตรขนาดใหญ่ (>100 ไร่) วิเคราะห์กราฟ BEP/NPSH และแก้ปัญหาระบบควบคุมอัตโนมัติ
+            </p>
+            <div class="border-t border-emerald-200 pt-3">
+              <span class="font-bold text-xs text-emerald-900">แนวทางพัฒนา:</span>
+              <ul class="text-xs text-slate-600 list-disc pl-4 space-y-1 mt-1">
+                <li>แต่งตั้งเป็น Internal Trainer หรือ Technical Advisor ประจำภูมิภาค</li>
+                <li>รับหน้าที่ถอดแบบและประมาณราคาโครงการขนาดใหญ่ (Project Bidding)</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-800 text-slate-400 py-4 text-center text-xs mt-auto border-t border-slate-700">
+    <div class="max-w-7xl mx-auto px-4">
+      <p>© KANOK PRODUCT - Agricultural Water System Assessment Bank (100 Questions Edition)</p>
+      <p class="text-slate-500 mt-1">พัฒนาเพื่อวัดผลศักยภาพพนักงาน PC 70 สาขา ทั่วประเทศ</p>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT QUESTION DATA & ENGINE ==================== -->
+  <script>
+    // DATA BANK: 100 Comprehensive Advanced Engineering & Product Questions
+    const questionBank = [
+      // ---------- CATEGORY 1: ท่อ อุปกรณ์ สปริงเกอร์ (1-25) ----------
+      {
+        id: 1,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ท่อ PVC ตามมาตรฐาน มอก. 17-2532 ชั้นคุณภาพ Class 13.5 กับ Class 8.5 ที่ขนาดระบุ DN 100 (4 นิ้ว) เท่ากัน ตัวเลือกใดถูกต้องที่สุดเกี่ยวกับการใช้งานและโครงสร้างท่อ?",
+        options: [
+          "Class 13.5 มีเส้นผ่านศูนย์กลางภายนอก (OD) ใหญ่กว่า Class 8.5",
+          "Class 13.5 มีความหนาผนังมากกว่า ทำให้เส้นผ่านศูนย์กลางภายใน (ID) เล็กกว่า Class 8.5",
+          "Class 8.5 ทนทานต่อแรงดันค้อนน้ำ (Water Surge) ได้สูงกว่า Class 13.5",
+          "อัตราการไหลสูงสุดใน Class 13.5 จะสูงกว่า Class 8.5 ที่ระดับ Head Loss เท่ากัน"
+        ],
+        answer: 1,
+        explanation: "ท่อ PVC มาตรฐาน มอก. กำหนดให้เส้นผ่านศูนย์กลางภายนอก (OD) ของท่อในขนาดระบุเดียวกันต้องเท่ากันเสมอ (เพื่อใช้กับข้อต่อมาตรฐานได้) ดังนั้นท่อ Class 13.5 ซึ่งรับแรงดันได้สูงกว่า จะมีความหนาผนัง (Wall Thickness) มากกว่า ส่งผลให้เส้นผ่านศูนย์กลางภายใน (ID) เล็กกว่า Class 8.5"
+      },
+      {
+        id: 2,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ท่อ HDPE ระบุอัตราส่วนขนาดเส้นผ่านศูนย์กลางต่อความหนา SDR 11 (Standard Dimension Ratio) หมายความว่าอย่างไร และมีคุณสมบัติต่างจาก SDR 17 อย่างไร?",
+        options: [
+          "SDR 11 ทนแรงดันได้น้อยกว่า SDR 17 เนื่องจากมีผนังบางกว่า",
+          "SDR คือค่า OD หารด้วยความหนาผนัง ดังนั้น SDR 11 ผนังหนากว่าและรับแรงดัน (PN) ได้สูงกว่า SDR 17",
+          "SDR 11 เป็นท่อความหนาแน่นต่ำ (LDPE) ส่วน SDR 17 เป็นท่อความหนาแน่นสูง (HDPE)",
+          "SDR 11 และ SDR 17 มีความหนาเท่ากันแต่ต่างกันที่เกรดเม็ดพลาสติก PE 80 และ PE 100"
+        ],
+        answer: 1,
+        explanation: "สมการ SDR = Outer Diameter (OD) / Wall Thickness (t) ดังนั้น ยิ่งค่า SDR น้อย แสดงว่าความหนาผนังยิ่งมากเทียบกับขนาดท่อ ท่อ SDR 11 จึงมีความหนามากกว่าและสามารถรับแรงดันพ้นแรงดัน (PN Rating) ได้สูงกว่า SDR 17"
+      },
+      {
+        id: 3,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "มินิสปริงเกอร์รุ่นใบปะทะของกนกโปรดักส์ มีสัมประสิทธิ์หัวฉีด $K = 20$ (ลิตร/ชม./$\text{bar}^{0.5}$) หากเปิดใช้งานที่แรงดันใช้งาน $2.25\text{ bar}$ อัตราการไหล ($Q$) ของหัวมินิสปริงเกอร์นี้จะมีค่าเท่าใด?",
+        options: [
+          "30 ลิตร/ชั่วโมง",
+          "45 ลิตร/ชั่วโมง",
+          "60 ลิตร/ชั่วโมง",
+          "90 ลิตร/ชั่วโมง"
+        ],
+        answer: 0,
+        explanation: "จากสูตรการไหลผ่านรู orifices $Q = K \times \sqrt{P}$ โดยที่ $P = 2.25\text{ bar} \implies \sqrt{2.25} = 1.5$ ดังนั้น $Q = 20 \times 1.5 = 30\text{ ลิตร/ชั่วโมง}$"
+      },
+      {
+        id: 4,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ในการวัดค่าความสม่ำเสมอในการกระจายน้ำ (Christiansen Uniformity Coefficient - CU) ของระบบอิมแพ็คสปริงเกอร์ในสวนทุเรียน ค่า CU ต่ำสุดที่ยอมรับได้ในเชิงวิศวกรรมชลประทานคือเท่าใด?",
+        options: [
+          "50%",
+          "65%",
+          "84%",
+          "98%"
+        ],
+        answer: 2,
+        explanation: "มาตรฐานการออกแบบระบบน้ำสปริงเกอร์ในสวนพืชเศรษฐกิจ กำหนดให้ค่าความสม่ำเสมอการกระจายน้ำ (CU) ไม่ควรต่ำกว่า 80-85% เพื่อป้องกันปัญหาต้นพืชได้รับน้ำไม่เท่ากันจนส่งผลต่อผลผลิต"
+      },
+      {
+        id: 5,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ฟุตวาล์ว (Foot Valve / หัวดูดน้ำ) กนกโปรดักส์ แบบลิ้นลิ้นคู่ (Double Flap Check) มีข้อได้เปรียบเชิงวิศวกรรมเหนือกว่าแบบลิ้นสปริงสแตนเลสธรรมดาในงานดูดน้ำจากสระเกษตรอย่างไร?",
+        options: [
+          "ลดความต้านทานการไหล (Head Loss ในฝั่งดูด) ได้มากกว่า ทำให้ปั๊มไม่เกิด Cavitation ง่าย",
+          "ทนต่อแรงดันค้อนน้ำ (Water Hammer) ฝั่งส่งน้ำได้ถึง 25 bar",
+          "ป้องกันเศษขยะขนาดใหญ่ได้โดยไม่ต้องใส่ตะแกรงกรอง",
+          "สามารถติดตั้งในแนวราบ (Horizontal) ได้โดยไม่รั่วซึม"
+        ],
+        answer: 0,
+        explanation: "ฟุตวาล์วแบบลิ้นคู่เปิดได้กว้างกว่าและไม่มีแรงต้านทานจากสปริงกด ทำให้ค่า Friction Loss (Head Loss) ฝั่งท่อดูดต่ำกว่ามาก ช่วยเพิ่ม Net Positive Suction Head Available ($NPSH_a$) ลดความเสี่ยงปั๊มเกิด Cavitation"
+      },
+      {
+        id: 6,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ค่าความขรุขระของผนังท่อ (Hazen-Williams Roughness Coefficient: $C$-value) ข้อใดถูกต้องเมื่อเปรียบเทียบท่อ PVC/PE ใหม่ กับท่อเหล็กหล่อดักไทล์ (Ductile Iron) เก่า?",
+        options: [
+          "ท่อ PVC/PE มีค่า $C \approx 150$, ท่อเหล็กเก่า $C \approx 100$ (ท่อ PVC/PE มีความเสียดทานน้อยกว่า)",
+          "ท่อ PVC/PE มีค่า $C \approx 80$, ท่อเหล็กเก่า $C \approx 140$ (ท่อ PVC/PE มีความเสียดทานมากกว่า)",
+          "ทั้งสองชนิดมีค่า $C = 120$ เท่ากันเนื่องจากเป็นท่อส่งน้ำเหมือนกัน",
+          "ค่า $C$-value เปลี่ยนแปลงตามความเร็วการไหล ไม่ขึ้นกับชนิดวัสดุ"
+        ],
+        answer: 0,
+        explanation: "สมการ Hazen-Williams กำหนดให้ยิ่งวัสดุเรียบ ค่า $C$ ยิ่งสูง และสูตรการคำนวณสูญเสียแรงดัน $h_f$ แปลกผกผันกับ $C^{1.852}$ ท่อพลาสติก (PVC/PE) ผนังเรียบมากจึงมีค่า $C \approx 140-150$ สูงกว่าท่อเหล็กชรา ($C \approx 100$)"
+      },
+      {
+        id: 7,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "เทปน้ำหยด (Drip Tape) ที่ระบุความหนา 8 Mils (ประมาณ 0.2 มม.) เหมาะสมกับการใช้งานแบบใดมากที่สุด?",
+        options: [
+          "ฝังใต้ดินลึก 50 ซม. สำหรับพืชไร่อายุเกิน 10 ปี",
+          "ปูบนพื้นดินสำหรับพืชอายุสั้น เช่น ข้าวโพด อ้อย ผักสวนครัว หรือพืชฤดูกาล",
+          "ใช้เป็นท่อประธาน (Mainline) แทนท่อ PVC",
+          "ใช้กับน้ำที่มีแรงดันสูงกว่า 3.0 bar"
+        ],
+        answer: 1,
+        explanation: "เทปน้ำหยดความหนา 8 Mils เป็นความหนามาตรฐานสำหรับการปูบนพื้นดินในพืชไร่อายุสั้น หรือพืชฤดูกาล (1-2 ฤดูกาล) ทนแรงดันใช้งานปกติช่วง 0.8 - 1.2 bar ไม่เหมาะสำหรับการฝังลึกหรือแรงดันสูง"
+      },
+      {
+        id: 8,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "การติดตั้งซัดเดิ้ลอานม้า (Saddle Clamp) รับท่อย่อยบนท่อ PVC ประธาน หากขันน็อตแน่นเกินไป (Over-torquing) จะเกิดความเสียหายในเชิงกลอย่างไร?",
+        options: [
+          "ท่อ PVC เกิดการเสียรูปทรงกลม (Ovality) หรือรอยแตกร้าวตามแนวยาวจากความเค้นแรงดึง (Tensile Stress)",
+          "โอริงยางสังเคราะห์จะขยายตัวและละลายเข้าไปในเนื้อท่อ",
+          "แรงดันน้ำในท่อประธานจะลดลง 50% ทันที",
+          "ไม่ส่งผลกระทบใดๆ เพราะซัดเดิ้ลทำจากพลาสติก PE"
+        ],
+        answer: 0,
+        explanation: "การขันน็อตซัดเดิ้ลอานม้าแน่นเกินไปทำให้เกิดความเค้นหนาแน่น (Stress Concentration) บริเวณรอยบีบ ท่อ PVC จะบี้เสียรูปทรงกลม เกิดรอยร้าวตามแนวยาว (Longitudinal Crack) เมื่อมีแรงดันน้ำมากระแทก"
+      },
+      {
+        id: 9,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "หัวพ่นหมอก (Fogger / Misting Nozzle) สำหรับลดความร้อนในโรงเรือนพืช ต้องการแรงดันทำงานและขนาดหยดน้ำ (Droplet Size) ในช่วงใดจึงจะหมอกระเหยได้ดีโดยไม่ทำใบพืชเปียกชุ่มเกินไป?",
+        options: [
+          "แรงดัน 0.5 bar, หยดน้ำขนาด 500 ไมครอน",
+          "แรงดัน 3.0 - 5.0 bar, หยดน้ำขนาด 50 - 100 ไมครอน",
+          "แรงดัน 10.0 - 12.0 bar, หยดน้ำขนาด 1,000 ไมครอน",
+          "แรงดันเท่าใดก็ได้ แต่ต้องใช้คู่กับท่อ PE ขนาด 16 มม. เท่านั้น"
+        ],
+        answer: 1,
+        explanation: "หัวพ่นหมอกลดอุณหภูมิในโรงเรือนต้องการแรงดันสูงพอสมควร ($3-5\text{ bar}$) เพื่ออัดน้ำผ่านรูขนาดเล็กมาก สร้างหยดน้ำขนาด fine mist ($50-100\text{ }\mu\text{m}$) ซึ่งละอองจะซึมและระเหยดึงความร้อนในอากาศ (Evaporative Cooling) ได้ดีโดยไม่ทำให้พืชเน่าเปื่อย"
+      },
+      {
+        id: 10,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "การเลือกใช้เช็ควาล์วแบบสวิง (Swing Check Valve) กับแบบสปริง (Spring Check Valve) ในระบบท่อส่งน้ำปั๊มแรงดันสูง มีข้อแตกต่างที่สำคัญอย่างไร?",
+        options: [
+          "แบบสวิงปิดได้รวดเร็วกว่าแบบสปริงเมื่อปั๊มหยุดทำงาน",
+          "แบบสปริงสามารถติดตั้งได้ทุกแนวท่อ (ตั้ง/นอน) และช่วยลดการกระแทก Water Hammer จากการปิดวาล์วฉับพลันได้ดีกว่า",
+          "แบบสวิงสร้าง Head Loss สูงกว่าแบบสปริงเสมอ",
+          "แบบสปริงไม่สามารถใช้กับน้ำที่มีแรงดันเกิน 1 bar ได้"
+        ],
+        answer: 1,
+        explanation: "เช็ควาล์วแบบสปริงมีแรงสปริงช่วยดันลิ้นปิดทันทีที่กระแสไหลย้อนกลับเริ่มเกิดขึ้น จึงลดปรากฏการณ์ Check Valve Slam และ Water Hammer ได้ดี และติดตั้งได้ทั้งแนวตั้งและแนวนอน ส่วนแบบสวิงอาศัยแรงโน้มถ่วงและแรงไหลย้อนกลับ จึงต้องติดตั้งในแนวราบหรือแนวตั้งชี้ขึ้นเท่านั้น"
+      },
+      {
+        id: 11,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "บอลวาล์ว UPVC กนกโปรดักส์ ทนต่อสารเคมีปุ๋ยและกรดในการล้างระบบจ่ายปุ๋ย (Fertigation) ตัวเลือกใดถูกต้องเกี่ยวกับความต้านทานทางเคมี?",
+        options: [
+          "UPVC ทนทานต่อกรดเคมีปุ๋ยส่วนใหญ่ได้ดี แต่ไม่ทนต่อสารทำละลายกลุ่ม Aromatic Hydrocarbons",
+          "UPVC จะผุกร่อนทันทีเมื่อสัมผัสกับปุ๋ยไนโตรเจนเข้มข้น",
+          "UPVC ทนกรดได้เฉพาะเมื่อผสมน้ำมันเครื่องเท่านั้น",
+          "ท่อและวาล์ว UPVC ห้ามใช้กับระบบผสมปุ๋ยเกษตรทุกกรณี"
+        ],
+        answer: 0,
+        explanation: "พลาสติก UPVC มีความต้านทานสารเคมี กรด ด่าง และสารละลายเกลือปุ๋ยเกษตรได้ดีเยี่ยม จึงนิยมใช้ในระบบจ่ายปุ๋ยอย่างกว้างขวาง แต่มีจุดอ่อนต่อสารทำละลายอินทรีย์ประเภท Ketones, Esters และ Aromatic Hydrocarbons"
+      },
+      {
+        id: 12,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ข้อต่อเกลียวท่อ PVC มาตรฐานไทย ใช้เกลียวประเภทใด และข้อควรระวังในการพันเทปพันเกลียว (Teflon Tape) คืออะไร?",
+        options: [
+          "เกลียว NPT; ต้องพันเทปหมุนตามเข็มนาฬิกา (ทิศทางเดียวกับการขันเกลียวเข้า) ประมาณ 15-20 รอบ",
+          "เกลียว BSPT / BSP; ต้องพันเทปย้อนทิศทางการขันเกลียวเพื่อให้เกลียวแน่นขึ้น",
+          "เกลียว Metric; ไม่ต้องพันเทปพันเกลียวเลย",
+          "เกลียว BSPT; พันเทปหนาเกินไปจนทำให้ข้อต่อตัวเมียแตกร้าวจากแรงดันขยายตัว (Hoop Stress)"
+        ],
+        answer: 3,
+        explanation: "เกลียวข้อต่อ PVC เกษตรส่วนใหญ่เป็นเกลียวเรียว BSPT การพันเทปพันเกลียวหนาเกินไป หรือใช้แรงขันเกลียวมากเกินไป จะสร้างแรงดันขยายตัวในแนวรัศมี (Hoop Stress) สูงมากจนทำให้ข้อต่อตัวเมีย PVC แตกร้าวได้"
+      },
+      {
+        id: 13,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "มินิสปริงเกอร์กนกโปรดักส์ รัศมีการฉีด 2.5 - 3.5 เมตร หากติดตั้งสูงจากพื้นดิน 50 ซม. แรงดันที่หัวฉีดตกเหลือ 0.8 bar (ต่ำกว่าเกณฑ์มาตรฐาน 1.5 - 2.0 bar) จะส่งผลอย่างไรต่อการกระจายน้ำ?",
+        options: [
+          "น้ำพุ่งไกลขึ้น แต่หยดน้ำกลายเป็นหมอกละเอียด",
+          "รัศมีการฉีดหดสั้นลง หยดน้ำขนาดใหญ่ตกเม็ดหนักบริเวณใกล้หัวฉีด ทำให้เกิดแหวนน้ำ (Donut effect)",
+          "อัตราการไหลเพิ่มขึ้น 2 เท่า",
+          "ไม่มีผลกระทบใดๆ เนื่องจากมินิสปริงเกอร์ทำงานได้ดีทุกระดับแรงดัน"
+        ],
+        answer: 1,
+        explanation: "เมื่อแรงดันตกต่ำกว่าระดับที่ออกแบบ ($<1.5\text{ bar}$) พลังงานกลในการฉีกกระแสน้ำให้เป็นเม็ดละเอียดจะลดลง น้ำจะไม่แตกตัวเป็นละออง แต่จะหลุดเป็นหยดน้ำขนาดใหญ่ ตกลงใกล้ๆ หัวฉีด รัศมีฉีดหดลง และการกระจายน้ำไม่สม่ำเสมอ"
+      },
+      {
+        id: 14,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ประโยชน์หลักของการใช้ Swing Joint (ข้อต่อปรับระดับ) เชื่อมต่อระหว่างท่อย่อย PE/PVC กับหัวสปริงเกอร์คืออะไร?",
+        options: [
+          "ช่วยเพิ่มแรงดันน้ำขึ้นอีก 1.0 bar ก่อนเข้าสปริงเกอร์",
+          "ป้องกันการแตกหักของท่อแขนงเมื่อสปริงเกอร์ถูกกดทับด้วยเครื่องจักรกลเกษตร และช่วยปรับระดับความสูง/แนวตั้งของหัวฉีด",
+          "ลดคราบตะกรันปูนในน้ำไม่ให้เกาะหัวสปริงเกอร์",
+          "ทำหน้าที่เป็นกรองในตัว"
+        ],
+        answer: 1,
+        explanation: "Swing Joint ประกอบด้วยข้อต่อเกลียวงอหลายตัวต่อกัน ช่วยให้หัวสปริงเกอร์สามารถยืดหยุ่น ยุบตัว หรือปรับระดับแนวตั้ง-แนวนอนได้ เมื่อมีแรงกดทับจากเครื่องจักรหรือสัตว์เดินชน โดยไม่ทำให้ท่อย่อยใต้ดินแตกหัก"
+      },
+      {
+        id: 15,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ท่อ PVC ระบุขนาด 2 นิ้ว (DN 50) ตามมาตรฐาน มอก. 17-2532 มีขนาดเส้นผ่านศูนย์กลางภายนอก (OD) เท่าใด?",
+        options: [
+          "50.0 มม.",
+          "60.0 มม.",
+          "63.0 มม.",
+          "75.0 มม."
+        ],
+        answer: 1,
+        explanation: "ท่อ PVC มาตรฐาน มอก. ของไทย ขนาดระบุ 2 นิ้ว (DN 50) จะมีขนาดเส้นผ่านศูนย์กลางภายนอก (Outer Diameter - OD) เท่ากับ 60.0 มม. (ส่วนท่อ PE ระบบมิลลิเมตร ขนาด 63 มม. จะเทียบเท่า 2 นิ้ว)"
+      },
+      {
+        id: 16,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "หัวน้ำหยด (Drip Emitter) มีรูเปิดขนาดเล็กประมาณ 0.5 - 1.2 มม. หากต้องการป้องกันการอุดตันของหัวน้ำหยดอย่างสมบูรณ์ ควรเลือกชุดกรองที่มีความละเอียดระดับใด?",
+        options: [
+          "40 Mesh (400 Micron)",
+          "80 Mesh (200 Micron)",
+          "120 Mesh (130 Micron)",
+          "200 Mesh (75 Micron)"
+        ],
+        answer: 2,
+        explanation: "มาตรฐานสากลสำหรับระบบน้ำหยด (Drip Irrigation) กำหนดให้ต้องใช้ตะแกรง/แผ่นดิสก์กรองความละเอียดไม่ต่ำกว่า 120 Mesh (130 Micron) ซึ่งมีขนาดรูเปิดกรองเล็กกว่า 1/10 ของช่องทางไหลน้ำหยด เพื่อป้องกันการอุดตัน"
+      },
+      {
+        id: 17,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "วาล์วปีกผีเสื้อ (Butterfly Valve) เมื่อนำมาใช้ปรับหรี่อัตราการไหลในท่อประธาน (Mainline) ไม่ควรเปิดหรี่แคบกว่ากี่องศา เพื่อป้องกันการเกิด Cavitation และความเสียหายที่แผ่นลิ้น?",
+        options: [
+          "ไม่ควรเปิดน้อยกว่า 30 องศา (ควรใช้งานช่วง 30° - 90°)",
+          "เปิดหรี่ 5 องศาได้โดยไม่มีผลกระทบ",
+          "วาล์วปีกผีเสื้อใช้ปรับหรี่ได้เฉพาะเมื่อเปิด 90 องศาเท่านั้น",
+          "ห้ามเปิดหรี่เกิน 10 องศา"
+        ],
+        answer: 0,
+        explanation: "การเปิดวาล์วปีกผีเสื้อหรี่แคบเกินไป (น้อยกว่า 30 องศาจากตำแหน่งปิด) จะทำให้ความเร็วของน้ำบริเวณขอบลิ้นสูงมาก แรงดันตกลงต่ำกว่าความดันไอ เกิดฟองอากาศและปรากฏการณ์ Cavitation กัดกร่อนแผ่นลิ้นวาล์วพังเสียหาย"
+      },
+      {
+        id: 18,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ท่อส่งน้ำผ้าใบ / ท่อส่งน้ำPE ชนิดแบน (Layflat Hose) มีข้อจำกัดเชิงวิศวกรรมข้อใดที่ต้องระวังมากที่สุดเมื่อเทียบกับท่อ PE แข็ง?",
+        options: [
+          "ไม่สามารถรับแรงดันสแตติกหรือแรงดันค้อนน้ำสูงๆ ได้ และเกิด Friction Loss สูงมากหากท่อคดเคี้ยวหรือพับงอ",
+          "layflat hose ทนแรงดันได้ดีกว่าท่อ PVC Class 13.5",
+          "ท่อ layflat ไม่สามารถใช้กลางแจ้งได้เลยเพราะแสงแดดจะทำให้ท่อละลายใน 1 ชั่วโมง",
+          " Layflat hose มีน้ำหนักหนักกว่าท่อเหล็ก"
+        ],
+        answer: 0,
+        explanation: "ท่อผ้าใบ/สายส่งน้ำชนิดแบน (Layflat Hose) เหมาะสำหรับการสูบส่งน้ำแรงดันต่ำถึงปานกลาง เคลื่อนย้ายง่าย แต่มีข้อจำกัดคือทนแรงดันกระแทกได้ต่ำ หากมีรอยพับงอ คดเคี้ยว จะเกิด Friction Loss สูงมาก และไม่ทนต่อการลากถูบนหินแหลมคม"
+      },
+      {
+        id: 19,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "สปริงเกอร์บิ๊กกัน (Big Gun Sprinkler) แรงดันสูง ตัวเรือนอลูมิเนียมกนกโปรดักส์ แรงดันใช้งาน 3.0 - 5.0 bar เหมาะสมกับงานประเภทใดมากที่สุด?",
+        options: [
+          "พ่นหมอกกล้วยไม้ในโรงเรือนปิด",
+          "ระบบรดน้ำพืชไร่พื้นที่กว้าง เช่น อ้อย มันสัมปะหลัง สนามหญ้าขนาดใหญ่ หรือการลดฝุ่นแปลงก่อสร้าง",
+          "ระบบน้ำหยดใต้ดินในสวนส้ม",
+          "ให้ปุ๋ยทางใบในแปลงผักอนุบาล"
+        ],
+        answer: 1,
+        explanation: "สปริงเกอร์ บิ๊กกัน (Big Gun) เป็นสปริงเกอร์รัศมีไกล (20-40 เมตร+) ใช้อัตราการไหลและแรงดันสูง เหมาะสำหรับพื้นที่กว้าง เช่น พืชไร่ สนามกีฬา หรือจัดการฝุ่น ไม่เหมาะกับงานพ่นหมอกหรือพืชอนุบาลเพราะเม็ดน้ำขนาดใหญ่กระทบใบพืชแรง"
+      },
+      {
+        id: 20,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "วาล์วกันน้ำย้อน (Check Valve) แบบลิ้นสวิง PVC กนกโปรดักส์ หากติดตั้งในท่อฝั่งดูดของปั๊ม (Suction Line) ต้องติดตั้งในทิศทางใด?",
+        options: [
+          "ลูกศรชี้ออกจากปั๊ม ไปทางสระน้ำ",
+          "ลูกศรชี้เข้าหาปั๊ม (ทิศทางการไหลจากสระน้ำเข้าหาทางดูดของปั๊ม)",
+          "ติดตั้งทิศทางใดก็ได้เนื่องจากเป็นวาล์วสวิง",
+          "ห้ามใช้เช็ควาล์วในท่อฝั่งดูดโดยเด็ดขาด"
+        ],
+        answer: 1,
+        explanation: "เช็ควาล์วทุกชนิดมีลูกศรแสดงทิศทางการไหล (Flow Direction) ติดอยู่บนตัววาล์ว ในท่อฝั่งดูด น้ำไหลจากสระเข้าหาปั๊ม ดังนั้นลูกศรต้องชี้เข้าหาตัวปั๊มเสมอ เพื่อให้น้ำไหลเข้าปั๊มได้และกันน้ำไหลย้อนกลับลงสระ"
+      },
+      {
+        id: 21,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ท่อ PE ดำตากแดดกลางแจ้ง ความยาว 100 เมตร อุณหภูมิเปลี่ยนจาก 25°C ในตอนเช้า เป็น 45°C ในตอนบ่าย (สัมประสิทธิ์การขยายตัวทางความร้อน $\alpha = 0.2\text{ mm/m/^\circ C}$) ท่อจะยืดตัวออกประมาณเท่าใด?",
+        options: [
+          "4 เซนติเมตร",
+          "40 เซนติเมตร",
+          "4 เมตร",
+          "ไม่ขยายตัวเลยเพราะเป็นพลาสติก"
+        ],
+        answer: 1,
+        explanation: "คำนวณจากสูตร $\Delta L = \alpha \times L \times \Delta T \implies \Delta L = 0.2 \times 100 \times (45 - 25) = 400\text{ มม.} = 40\text{ เซนติเมตร}$ การเดินท่อ PE กลางแจ้งจึงต้องเผื่อการลอนท่อ (Snaking) ไม่ให้ตึงเกินไป"
+      },
+      {
+        id: 22,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "คุณสมบัติของการชดเชยแรงดัน (Pressure Compensating - PC) ในสปริงเกอร์หรือหัวน้ำหยด กนกโปรดักส์ ทำงานด้วยกลไกใด?",
+        options: [
+          "ใช้วาล์วมอเตอร์ไฟฟ้าคุมอัตราการไหลภายในหัวฉีด",
+          "ใช้แผ่นยางไดอะแฟรมซิลิโคน ยืดหยุ่นปรับบีบช่องทางไหลตามแรงดันน้ำที่เพิ่มขึ้น เพื่อรักษาอัตราการไหลให้คงที่",
+          "ใช้น้ำหนักลูกเหล็กถ่วงกดหัวฉีด",
+          "ใช้วิธีการเพิ่มขนาดรูฉีดเมื่อแรงดันสูงขึ้น"
+        ],
+        answer: 1,
+        explanation: "อุปกรณ์ PC อาศัยแผ่นยางไดอะแฟรมซิลิโคน ยืดหยุ่นตัวตามแรงดันน้ำ เมื่อแรงดันสูงขึ้น แผ่นยางจะถูกดันให้โค้งไปแคบช่องทางไหล ทำให้อัตราการไหล ($Q$) คงที่สม่ำเสมอแม้แรงดันในระบบจะเปลี่ยนแปลงช่วง 1.5 - 4.0 bar"
+      },
+      {
+        id: 23,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ฟุตวาล์วทองเหลือง กับ ฟุตวาล์ว UPVC กนกโปรดักส์ ข้อใดเป็นจุดเด่นสำคัญของฟุตวาล์ว UPVC ในการใช้งานเกษตร?",
+        options: [
+          "UPVC น้ำหนักเบา ไม่ดึงท่อดูดพับตกท้องช้าง ไม่เป็นสนิม ทนสารเคมีปุ๋ย และราคาประหยัดกว่า",
+          "UPVC ทนความร้อนได้ถึง 200°C",
+          "ทองเหลืองทนสารเคมีกรดได้ดีกว่า UPVC",
+          "UPVC สามารถเชื่อมต่อกับท่อเหล็กได้โดยไม่ต้องใช้เกลียว"
+        ],
+        answer: 0,
+        explanation: "ฟุตวาล์ว UPVC มีน้ำหนักเบากว่าทองเหลืองมาก จึงไม่ถ่วงท่อดูด PE/PVC ให้พ้อย้อยตกท้องช้างจนเกิดมวลอากาศสะสม อีกทั้งไม่เป็นสนิม ตะกรันไม่เกาะ ทนต่อปุ๋ยเคมีในสระเกษตรได้ดีเยี่ยม"
+      },
+      {
+        id: 24,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "ค่าความสม่ำเสมอการจ่ายน้ำของระบบน้ำหยด (Emission Uniformity - EU) คำนวณจากสูตร $EU = 100 \times \left( \frac{q_{1/4}}{q_{avg}} \right)$ ค่า $q_{1/4}$ คืออะไร?",
+        options: [
+          "อัตราการไหลของหัวน้ำหยดที่อยู่ใกล้ปั๊มที่สุด 25%",
+          "ค่าเฉลี่ยอัตราการไหลของหัวน้ำหยดกลุ่มที่จ่ายน้ำได้น้อยที่สุด 25% (Lower Quarter)",
+          "อัตราการไหลของหัวน้ำหยดที่แรงดัน 1/4 bar",
+          "ปริมาณน้ำที่สูญเสียไปกับการระเหย 25%"
+        ],
+        answer: 1,
+        explanation: "ค่า $q_{1/4}$ (or $q_{lq}$) คือค่าเฉลี่ยของอัตราการไหลจากหัวน้ำหยดกลุ่มที่ต่ำที่สุด 25% ของหัวที่สุ่มวัดทั้งหมด นำมาหารด้วยอัตราการไหลเฉลี่ยทั้งแปลง ($q_{avg}$) เพื่อประเมินความสม่ำเสมอในจุดที่แย่ที่สุด"
+      },
+      {
+        id: 25,
+        cat: "cat1",
+        catName: "หมวดที่ 1: ข้อมูลท่อ อุปกรณ์ และสปริงเกอร์",
+        question: "น้ำยาประสานท่อ PVC (Solvent Cement) กนกโปรดักส์ เชื่อมประสานท่อโดยกลไกใด และต้องรอระยะเวลาเซ็ตตัวเต็มที่ (Full Cure) กี่ชั่วโมงก่อนทดสอบแรงดันน้ำสูงสุด (Hydrostatic Test)?",
+        options: [
+          "ทำหน้าที่เป็นกาวเหนียวยึดเกาะ surface; รอ 10 นาที",
+          "ทำละลายเนื้อพลาสติก PVC ให้หลอมประสานเป็นเนื้อเดียวกัน; ควรอ่างรอแห้งอย่างน้อย 24 ชั่วโมงสำหรับแรงดันสูง",
+          "ทำปฏิกิริยาความร้อนอ๊อกซี่; รอ 1 ชั่วโมง",
+          "ทำให้น้ำในท่อแห้งไวขึ้น; ทดสอบได้ทันทีหลังทา"
+        ],
+        answer: 1,
+        explanation: "น้ำยาประสานท่อ PVC ไม่ใช่กาวเหนียว แต่เป็นสารทำละลาย (Solvent) ที่กัดและละลายเนื้อพลาสติก PVC ของท่อและข้อต่อให้หลอมละลายประสานรวมกันเป็นเนื้อเดียว เมื่อสารทำละลายระเหยหมด ข้อต่อจะแข็งตัวเต็มที่ ซึ่งสำหรับงานแรงดันสูงควรรออย่างน้อย 24 ชั่วโมง"
+      },
+
+      // ---------- CATEGORY 2: ออกแบบระบบน้ำ พืช และดิน (26-50) ----------
+      {
+        id: 26,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "ทุเรียนพันธุ์หมอนทองระยะติดผลขนาดเท่าไข่ไก่ อัตราการคายระเหยอ้างอิง ($ET_o$) = 5.0 มม./วัน สัมประสิทธิ์พืช ($K_c$) = 0.9 สรงพุ่มทุเรียนเส้นผ่านศูนย์กลาง 6 เมตร ความต้องการน้ำของต้นทุเรียนนี้ต่อวัน ($ET_c$) เท่ากับกี่ลิตร/วัน?",
+        options: [
+          "63.6 ลิตร/วัน",
+          "127.2 ลิตร/วัน",
+          "254.3 ลิตร/วัน",
+          "500 ลิตร/วัน"
+        ],
+        answer: 1,
+        explanation: "1) คำนวณ $ET_c = ET_o \times K_c = 5.0 \times 0.9 = 4.5\text{ มม./วัน}$\n2) พื้นที่ทรงพุ่ม $A = \pi \times r^2 = 3.1416 \times (3)^2 = 28.27\text{ ตร.ม.}$\n3) ปริมาณน้ำ = $4.5\text{ มม.} \times 28.27\text{ ตร.ม.} = 127.2\text{ ลิตร/วัน}$"
+      },
+      {
+        id: 27,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "แปลงปลูกพืชเป็นดินเหนียวจัด มีอัตราการซึมน้ำของดิน (Soil Intake Rate) สูงสุดเพียง 5 มม./ชั่วโมง หากเลือกสปริงเกอร์ที่มีอัตราการฉีดลงดิน (Precipitation Rate - PR) 12 มม./ชั่วโมง จะเกิดปัญหาทางปฐพีกลศาสตร์และชลประทานอย่างไร?",
+        options: [
+          "ดินจะแห้งเร็วกว่าปกติ",
+          "น้ำซึมลงดินไม่ทัน เกิดน้ำไหลนองบนผิวดิน (Surface Runoff) สูญเสียน้ำ พัดพาหน้าดินและปุ๋ยสูญหาย",
+          "รากพืชจะดูดน้ำได้เร็วขึ้น 2 เท่า",
+          "ไม่มีผลกระทบ เพราะดินเหนียวอุ้มน้ำได้ดีอยู่แล้ว"
+        ],
+        answer: 1,
+        explanation: "หากอัตราการฉีดน้ำของสปริงเกอร์ ($PR$) สูงกว่าอัตราการซึมได้ของดิน (Soil Intake Rate) น้ำส่วนเกินจะไม่สามารถซึมลงชั้นรากพืชได้ทัน และจะเกิดการไหลนองบนผิวดิน (Runoff) ชะล้างหน้าดิน เกิดการกัดกร่อน และสูญเสียน้ำโดยเปล่าประโยชน์"
+      },
+      {
+        id: 28,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "อัตราการฉีดเฉลี่ย (Precipitation Rate - $PR$) ของสปริงเกอร์กนกโปรดักส์ วางผังแบบสี่เหลี่ยม ระยะห่างระหว่างหัวสปริงเกอร์ ($S_l$) = 6 เมตร ระยะห่างระหว่างแถว ($S_m$) = 6 เมตร อัตราการไหลหัวละ ($Q$) = 540 ลิตร/ชั่วโมง คำนวณค่า $PR$ ได้กี่ มม./ชั่วโมง?",
+        options: [
+          "5.0 มม./ชั่วโมง",
+          "15.0 มม./ชั่วโมง",
+          "30.0 มม./ชั่วโมง",
+          "90.0 มม./ชั่วโมง"
+        ],
+        answer: 1,
+        explanation: "สูตรคำนวณ $PR (\text{มม./ชม.}) = \frac{Q (\text{ลิตร/ชม.})}{S_l (\text{เมตร}) \times S_m (\text{เมตร})} = \frac{540}{6 \times 6} = \frac{540}{36} = 15.0\text{ มม./ชั่วโมง}$"
+      },
+      {
+        id: 29,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "ค่าความชื้นที่พืชนำไปใช้ได้ง่าย (Readily Available Water - RAW) กำหนดจากสัดส่วนการยอมให้ความชื้นในดินลดลง (Management Allowed Depletion - MAD) สำหรับไม้ผล เช่น ไม้ผลทุเรียน ควรตั้งค่า MAD ไว้กี่เปอร์เซ็นต์ของน้ำที่อุ้มไว้ได้?",
+        options: [
+          "10 - 20%",
+          "40 - 50%",
+          "80 - 90%",
+          "100%"
+        ],
+        answer: 1,
+        explanation: "ค่า MAD สำหรับไม้ผลส่วนใหญ่กำหนดไว้อยู่ในช่วง 40 - 50% ของความชื้นที่เป็นประโยชน์ (Available Water Capacity) หากปล่อยให้ดินแห้งจนความชื้นลดลงเกิน 50% พืชจะเริ่มความเครียดจากความแห้งแล้ง (Water Stress) ส่งผลกระทบต่อการเจริญเติบโต"
+      },
+      {
+        id: 30,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "การวางผังท่อย่อย (Lateral Line) บนพื้นที่ลาดชัน (Sloped Terrain) ชี้ลงเขา ตามหลักการไฮดรอลิกส์ควรวางแนวท่ออย่างไรเพื่อรักษาระดับแรงดันในท่อให้สม่ำเสมอที่สุด?",
+        options: [
+          "วางท่อย่อยขนานไปกับแนวชั้นความสูง (Contour Line) หรือใช้อุปกรณ์ชดเชยแรงดัน (PC)",
+          "วางท่อย่อยดิ่งตรงลงตามความชันของเขาโดยไม่ติดวาล์ว",
+          "ใช้ท่อขนาดเล็กที่สุดเท่าที่มีเพื่อลดแรงดัน",
+          "วางท่อเป็นวงกลมรอบยอดเขา"
+        ],
+        answer: 0,
+        explanation: "การวางท่อย่อยขนานไปตามแนวชั้นความสูง (Contour Lines) ช่วยให้ความสูงสแตติก (Elevation Head) ตลอดแนวท่อย่อยใกล้เคียงกันที่สุด หรือหากต้องวางลงทางชัน ต้องคำนวณ Elevation Head Gain ที่เพิ่มขึ้นตามความสูง ($0.1\text{ bar}$ ต่อความสูง $1\text{ meter}$) และใช้อุปกรณ์ PC ชดเชย"
+      },
+      {
+        id: 31,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "รูปทรงการเปียกของน้ำใต้ดิน (Wetting Pattern / Bulb) ที่เกิดจากหัวน้ำหยด ในดินทราย (Sandy Soil) เทียบกับดินเหนียว (Clay Soil) มีลักษณะแตกต่างกันอย่างไร?",
+        options: [
+          "ดินทรายเปียกแผ่กว้างในแนวราบ; ดินเหนียวเปียกลึกลงแนวดิ่ง",
+          "ดินทรายเปียกเป็นรูปแคปซูลยึดลึกลงแนวดิ่ง (แคบและลึก); ดินเหนียวเปียกแผ่ขยายออกด้านข้างเป็นรูปกระทะ (กว้างและตื้น)",
+          "ทั้งสองดินมีรูปทรงการเปียกเป็นทรงกลมเพอร์เฟกต์เหมือนกัน",
+          "ดินทรายน้ำไม่สามารถซึมผ่านได้"
+        ],
+        answer: 1,
+        explanation: "ดินทรายมีแรงโน้มถ่วง (Gravitational force) เด่นกว่าแรงแคปปิลลารี น้ำจึงซึมดิ่งลงลึกในแนวดิ่งอย่างรวดเร็วเป็นทรงแคบ ส่วนดินเหนียวมีแรงแคปปิลลารี (Capillary force) สูงมาก น้ำจะถูกดูดซึมกระจายออกด้านข้างในแนวราบกว้าง"
+      },
+      {
+        id: 32,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "สวนทุเรียนขนาด 50 ไร่ แบ่งการเปิดน้ำออกเป็น 4 โซน (Zone Control) เหตุผลทางวิศวกรรมที่สำคัญที่สุดในการแบ่งโซนคืออะไร?",
+        options: [
+          "เพื่อลดขนาดปั๊มน้ำ, ขนาดท่อประธาน และกำลังไฟฟ้าที่ต้องใช้ลง 4 เท่า เมื่อเทียบกับการเปิดพร้อมกันทั้ง 50 ไร่",
+          "เพื่อให้ทุเรียนได้รับน้ำไม่เท่ากันในแต่ละโซน",
+          "เพื่อเปิดโอกาสให้แรงดันน้ำในท่อเป็นศูนย์",
+          "เพื่อให้สามารถใช้ท่อ PVC หนา 3 มม. ได้ทุกจุด"
+        ],
+        answer: 0,
+        explanation: "การแบ่งโซนการรดน้ำ (Zone Operation) ช่วยลดอัตราการไหลรวม ($Q_{total}$) ที่ปั๊มและท่อประธานต้องรองรับในเวลาเดียวกัน ส่งผลให้ใช้ปั๊มขนาดเล็กลง ลดขนาดท่อประธาน ลดกระแสไฟฟ้า และประหยัดค่าลงทุนงบประมาณระบบน้ำอย่างมาก"
+      },
+      {
+        id: 33,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "ในการออกแบบระบบสปริงเกอร์เหนือทรงพุ่ม หากความเร็วลมในพื้นที่สูงเกิน 15 กิโลเมตร/ชั่วโมง ควรปรับระยะห่างระหว่างหัวสปริงเกอร์เทียบกับรัศมีการฉีด ($R$) อย่างไร?",
+        options: [
+          "ขยายระยะห่างออกเป็น $1.5 \times R$",
+          "ลดระยะห่างลงเหลือ $50\% - 60\%$ ของรัศมีการฉีด ($R$) และวางท่อขวางทิศทางลมหลัก",
+          "ไม่ต้องปรับระยะห่าง แต่ให้เพิ่มความสูงเสาสปริงเกอร์ขึ้นอีก 5 เมตร",
+          "เปลี่ยนไปใช้หัวพ่นหมอกแทน"
+        ],
+        answer: 1,
+        explanation: "เมื่อมีลมพัดแรง กระแสน้ำสปริงเกอร์จะถูกลมพัดปลิวบิดเบี้ยว (Wind Drift) วิธีแก้ไขคือต้องลดระยะห่างระหว่างหัวสปริงเกอร์ให้ถี่ขึ้น (เหลือ 50-60% ของรัศมีฉีด) เพื่อให้รูปการฉีด overlap ซ้อนทับกันมากขึ้นชดเชยแรงลม"
+      },
+      {
+        id: 34,
+        cat: "cat2",
+        catName: "หมวดที่ 3: การออกแบบระบบน้ำ พืช และดิน",
+        question: "เกณฑ์มาตรฐานการออกแบบทางไฮดรอลิกส์ยอมให้ความต่างของแรงดัน ($\Delta P$) ระหว่างหัวสปริงเกอร์หัวแรกและหัวสุดท้ายบนท่อย่อย (Lateral Line) เดียวกัน ไม่เกินกี่เปอร์เซ็นต์ เพื่อให้อัตราการไหลเบี่ยงเบนไม่เกิน 10%?",
+        options: [
+          "ไม่เกิน 5%",
+          "ไม่เกิน 20%",
+          "ไม่เกิน 50%",
+          "ยอมให้ต่างกันเท่าใดก็ได้"
+        ],
+        answer: 1,
+        explanation: "ตามกฎความสัมพันธ์ $Q \propto \sqrt{P}$ การควบคุมให้อัตราการไหลระหว่างหัวฉีดต่างกันไม่เกิน 10% จะต้องควบคุมให้แรงดันสูญเสียความเสียดทาน ($\Delta P$) ตลอดความยาวท่อย่อยไม่เกิน 20% ของแรงดันทำงานหัวฉีด"
+      },
+      {
+        id: 35,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "ความลึกของเขตรากพืชที่ใช้ในการคำนวณการกักเก็บน้ำในดิน (Root Zone Depth - $Z_r$) ของต้นทุเรียนโตเต็มวัยที่ให้ผลผลิตแล้ว ควรใช้อยู่ในช่วงใดในการคำนวณ?",
+        options: [
+          "10 - 20 ซม.",
+          "60 - 90 ซม.",
+          "200 - 300 ซม.",
+          "500 ซม."
+        ],
+        answer: 1,
+        explanation: "รากแขนงหาอาหารหลัก (Feeder roots) ของทุเรียนโตเต็มวัยจะเจริญหนาแน่นที่สุดในระดับความลึกช่วง 30 - 60 ซม. และไม่เกิน 90 ซม. จากผิวดิน ดังนั้นความลึกเขตรากพืชเพื่อวางแผนการให้น้ำจึงใช้ช่วง 60 - 90 ซม."
+      },
+      {
+        id: 36,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "รอบเวรการให้น้ำ (Irrigation Interval - $I$) คำนวณจาก $I = \frac{\text{RAW}}{ET_c}$ หากน้ำชลประทานที่พืชนำไปใช้ได้ง่าย $\text{RAW} = 18\text{ มม.}$ และความต้องการน้ำพืช $ET_c = 6\text{ มม./วัน}$ รอบเวรการให้น้ำที่เหมาะสมคือเท่าใด?",
+        options: [
+          "ให้น้ำทุกๆ 1 วัน",
+          "ให้น้ำทุกๆ 3 วัน",
+          "ให้น้ำทุกๆ 6 วัน",
+          "ให้น้ำเดือนละครั้ง"
+        ],
+        answer: 1,
+        explanation: "รอบเวรการให้น้ำ $I = \frac{\text{RAW}}{ET_c} = \frac{18\text{ มม.}}{6\text{ มม./วัน}} = 3\text{ วัน}$ นั่นคือต้องให้น้ำซ้ำทุกๆ 3 วัน"
+      },
+      {
+        id: 37,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "เส้นระดับพลังงานน้ำ (Hydraulic Gradient Line - HGL) ในแผนผังระบบน้ำหมายถึงสิ่งใด?",
+        options: [
+          "ระดับความสูงของท่อใต้ดิน",
+          "เส้นที่แสดงระดับพลังงานแรงดันน้ำ (Pressure Head + Elevation Head) ที่เหลืออยู่ในระบบท่อตามแนวนอน",
+          "ปริมาณปุ๋ยเคมีที่ละลายในน้ำ",
+          "ความเร็วของปั๊มน้ำ"
+        ],
+        answer: 1,
+        explanation: "เส้น HGL (Hydraulic Gradient Line) คือเส้นกราฟแสดงผลรวมของ Pressure Head ($P/\gamma$) กับ Elevation Head ($Z$) ตลอดแนวท่อส่งน้ำ ซึ่งจะมีความสโลปเอียงลงตามทิศทางการไหลอันเนื่องมาจาก friction loss ในระบบท่อ"
+      },
+      {
+        id: 38,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "การจัดตำแหน่งชุดวาล์วควบคุมประจำโซน (Valve Manifold) ในแปลงเกษตร ควรวางไว้ ณ ตำแหน่งใดเพื่อประหยัดขนาดท่อย่อยและลด Friction Loss ได้ดีที่สุด?",
+        options: [
+          "วางไว้ที่มุมสุดของแปลงเสมอ",
+          "วางไว้บริเวณจุดกึ่งกลางของแขนงท่อประธานย่อย (Mid-feed Submain Layout)",
+          "วางไว้ภายนอกแปลงไกลออกไป 1 กิโลเมตร",
+          "วางไว้บนต้นไม้สูง"
+        ],
+        answer: 1,
+        explanation: "การวางวาล์วควบคุมไว้จุดกึ่งกลางของท่อย่อย (Mid-feed) จะแบ่งกระแสน้ำออกเป็น 2 ทางซ้าย-ขวา ทำให้ปริมาณการไหลในแต่ละฝั่งลดลงครึ่งหนึ่ง ($Q/2$) และความยาวท่อลดลงครึ่งหนึ่ง ($L/2$) ช่วยลด Head Loss ลงได้อย่างมหาศาล"
+      },
+      {
+        id: 39,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "แปลงปลูกพืชร่วม (Intercropping) เช่น ปลูกกล้วยแซมในสวนทุเรียนระยะแรก การออกแบบระบบสปริงเกอร์ข้อใดเหมาะสมที่สุด?",
+        options: [
+          "ใช้สปริงเกอร์บิ๊กกันตัวเดียวฉีดครอบคลุมทั้งแปลง",
+          "ใช้ระบบสปริงเกอร์สองหัวต่อต้น (Dual Sprinkler) หรือวาล์วคุมแยกชุดเพื่อสามารถปรับเปลี่ยนระยะรดน้ำตามทรงพุ่มทุเรียนได้เมื่อกล้วยถูกรื้อถอน",
+          "ใช้น้ำหยดฝังใต้ดินลึก 2 เมตร",
+          "ไม่ต้องให้น้ำกล้วย ให้รอน้ำฝนอย่างเดียว"
+        ],
+        answer: 1,
+        explanation: "การปลูกพืชแซมมีระยะเวลาและขนาดทรงพุ่มที่เปลี่ยนแปลงเมื่อเวลาผ่านไป การออกแบบระบบน้ำยืดหยุ่นด้วยการแยกสายหรือใช้สปริงเกอร์หัวแยก จะช่วยให้ปรับเปลี่ยนปริมาณน้ำตามพัฒนาการของพืชหลัก (ทุเรียน) ได้เมื่อรื้อพืชแซมออก"
+      },
+      {
+        id: 40,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "สวนลำไยบนพื้นที่เนินเขาลาดชัน 20 องศา การเลือกใช้หัวน้ำหยดหรือสปริงเกอร์ประเภทใดจะช่วยแก้ปัญหาต้นบนเขาได้น้ำน้อย ต้นล่างเขาได้น้ำมากจนรากเน่า?",
+        options: [
+          "หัวฉีดธรรมดารูใหญ่",
+          "อุปกรณ์ประเภทชดเชยแรงดัน (Pressure Compensating - PC) ทั้งสปริงเกอร์และหัวน้ำหยด",
+          "เพิ่มขนาดปั๊มน้ำให้ใหญ่ขึ้น 10 เท่า",
+          "ปิดวาล์วรดน้ำด้วยมือทุก 5 นาที"
+        ],
+        answer: 1,
+        explanation: "พื้นที่ชันทำให้เกิด Static Head Gain ที่ปลายท่อด้านล่างล้นหลาม อุปกรณ์ชดเชยแรงดัน (PC) จะควบคุมอัตราการไหลให้ออกเท่ากันทุกหัวตลอดช่วงแรงดัน $1.5-4.0\text{ bar}$ ไม่ว่าหัวฉีดจะอยู่บนยอดเขาหรือเชิงเขา"
+      },
+      {
+        id: 41,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "การป้องกันรากพืชอุดตันรูจ่ายน้ำในระบบน้ำหยดใต้ผิวดิน (Sub-surface Drip Irrigation - SDI) มีเทคนิควิศวกรรมข้อใด?",
+        options: [
+          "ใช้น้ำร้อนล้างท่อทุกวัน",
+          "ใช้หัวน้ำหยดที่มีกลไก Physical Root Barrier, สารป้องกันราก (Physical/Chemical Shielding) และระบบป้องกันแรงดูดย้อนกลับ (Anti-Siphon Mechanism)",
+          "เพิ่มแรงดันน้ำเป็น 20 bar ตลอดเวลา",
+          "ไม่สามารถป้องกันได้ ต้องขุดเปลี่ยนสายทุกเดือน"
+        ],
+        answer: 1,
+        explanation: "ระบบ SDI ป้องกันรากพืชไชเข้าอุดตันรูจ่ายน้ำโดย 1) โครงสร้างทางกายภาพป้องกันราก 2) แผ่น Anti-Siphon ป้องกันการดูดเศษดินเข้าหัวฉีดเมื่อปิดปั๊ม และ 3) สารเคมีขับไล่รากพืชผสมในเนื้อพลาสติก"
+      },
+      {
+        id: 42,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "การเปิดวาล์วไล่ตะกอนในท่อ (Flushing Velocity) ในท่อย่อยและท่อประธานย่อย ควรมีความเร็วการไหลของน้ำในท่อขณะเปิดปลายสายไม่ต่ำกว่าเท่าใดเพื่อดันตะกอนหลุดออก?",
+        options: [
+          "0.1 เมตร/วินาที",
+          "0.5 - 0.6 เมตร/วินาที (1.5 - 2.0 ft/sec)",
+          "10.0 เมตร/วินาที",
+          "ความเร็วเท่าใดก็ได้"
+        ],
+        answer: 1,
+        explanation: "เกณฑ์มาตรฐานชลประทานระบุว่า ความเร็วในการเปิดล้างท่อ (Flushing Velocity) ที่ปลายสายท่อย่อยต้องมีความเร็วอย่างน้อย $0.5 - 0.6\text{ m/s}$ เพื่อเกิดแรงเฉือน (Shear Stress) เพียงพอในการพัดพาตะกอนทรายและไบโอฟิล์มหลุดออกนอกท่อ"
+      },
+      {
+        id: 43,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "การประเมินคุณภาพน้ำทางเคมีสำหรับการชลประทาน ค่า SAR (Sodium Adsorption Ratio) และค่า EC (Electrical Conductivity) บอกถึงความเสี่ยงด้านใดของน้ำเกษตร?",
+        options: [
+          "ความเป็นกรดของน้ำฝน",
+          "ความเสี่ยงคราบเค็ม ความเสี่ยงดินโครงสร้างพัง (Soil Dispersion) และการสะสมความโซเดียมเป็นพิษต่อพืช",
+          "ปริมาณออกซิเจนละลายในน้ำ",
+          "ความอุ่นของน้ำสระ"
+        ],
+        answer: 1,
+        explanation: "ค่า $EC_w$ วัดความเค็มรวมของน้ำ ส่วนค่า $SAR$ วัดสัดส่วนโซเดียมต่อแคลเซียมและแมกนีเซียม หากค่า SAR สูง ดินจะสูญเสียโครงสร้าง บดแน่น น้ำและอากาศไม่ซึมผ่าน และเกิดพิษโซเดียมในพืช"
+      },
+      {
+        id: 44,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "ระบบสปริงเกอร์พ่นคายความร้อนลดอุณหภูมิพืช (Evaporative Cooling) ในช่วงอนาคตที่มีคลื่นความร้อนสูง (>40°C) ควรออกแบบเปิดน้ำอย่างไร?",
+        options: [
+          "เปิดน้ำรดดินให้ท่วมขังเป็นเวลา 24 ชั่วโมง",
+          "ฉีดพ่นละอองน้ำเป็นจังหวะเปิด-ปิด (Pulse Irrigation) เหนือทรงพุ่มในช่วงเวลาที่มีอุณหภูมิสูงสุดของวัน",
+          "ให้น้ำเฉพาะตอนเที่ยงคืนเท่านั้น",
+          "ฉีดน้ำผสมน้ำมันเครื่อง"
+        ],
+        answer: 1,
+        explanation: "การลดความร้อนชั่วคราวให้พืชช่วงอากาศร้อนจัดเพื่อป้องกันเกสรหมอนทองทุเรียนฝ่อ ใช้วิธีฉีดละอองน้ำเหนือพุ่มไม้เป็นจังหวะ (Pulse) เพื่อให้น้ำระเหยดึงความร้อนสะสมออกโดยไม่อิ่มตัวจนดินแฉะรากเน่า"
+      },
+      {
+        id: 45,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "การคำนวณค่าความสม่ำเสมอการกระจายน้ำ Lower Quarter Distribution Uniformity ($DU$) หากสุ่มวัดอัตราการไหล 16 จุด ได้ค่าเฉลี่ยทั้งแปลง = 100 ลิตร/ชม. และค่าเฉลี่ยของ 4 จุดที่ต่ำที่สุด = 85 ลิตร/ชม. ค่า $DU$ เท่ากับเท่าใด?",
+        options: [
+          "65%",
+          "85%",
+          "100%",
+          "115%"
+        ],
+        answer: 1,
+        explanation: "สูตรคำนวณ $DU = \frac{q_{lq}}{q_{avg}} \times 100 = \frac{85}{100} \times 100 = 85\%$ จัดเป็นค่าความสม่ำเสมอในระดับดีมาก"
+      },
+      {
+        id: 46,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "การออกแบบบ่อสูบน้ำ (Suction Sump / Pit) เพื่อป้องกันการเกิดน้ำวนดึงอากาศ (Vortex Formation) เข้าสู่ท่อดูดปั๊ม ระยะจมต่ำสุดของหัวดูดใต้ระดับน้ำ (Submergence Depth - $S$) ควรมีค่าอย่างไรเทียบกับเส้นผ่านศูนย์กลางท่อดูด ($D$)?",
+        options: [
+          "$S \ge 1.5 \times D$ ถึง $2.0 \times D$ (และมีระยะห่างจากพื้นบ่อ $> 0.5D$)",
+          "ให้หัวดูดอยู่ปริ่มผิวน้ำพอดี",
+          "วางหัวดูดติดกับพื้นบ่อทับโคลน",
+          "ไม่จำเป็นต้องมีระยะจม"
+        ],
+        answer: 0,
+        explanation: "เพื่อป้องกันการเกิดปฏิกิริยาน้ำวน (Vortex) ซึ่งจะดูดฟองอากาศเข้าปั๊มทำให้ปั๊มเสียแรงสูบ หัวดูดต้องจมอยู่ใต้ระดับน้ำต่ำสุดอย่างน้อย $1.5 - 2.0$ เท่าของเส้นผ่านศูนย์กลางท่อดูด และลอยเหนือพื้นบ่ออย่างน้อย $0.5D$"
+      },
+      {
+        id: 47,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "โครงข่ายท่อประธานแบบวงแหวน (Ring Main / Closed Loop System) มีข้อได้เปรียบไฮดรอลิกส์เหนือกว่าแบบกิ่งไม้ (Dendritic / Open Tree System) อย่างไร?",
+        options: [
+          "ใช้วัสดุท่อน้อยกว่า 10 เท่า",
+          "น้ำไหลเข้าหาจุดใช้งานได้ 2 ทิศทาง ช่วยลด Friction Loss และปรับสมดุลแรงดันในระบบได้ดีกว่ามาก",
+          "ไม่ต้องใช้ปั๊มน้ำในการส่งน้ำ",
+          "ท่อจะไม่วันแตกจากแรงดัน"
+        ],
+        answer: 1,
+        explanation: "ระบบท่อแบบ Closed Loop (Ring Main) ทำให้น้ำสามารถไหลกระจายไปทางซ้ายและขวาพร้อมกันเข้าสู่จุดรดน้ำ ทำให้อัตราการไหลในแต่ละเส้นท่อลดลงครึ่งหนึ่ง ส่งผลให้ Head Loss ต่ำลงมาก และแรงดันสม่ำเสมั่วทั้งแปลง"
+      },
+      {
+        id: 48,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "ชุดฉีดปุ๋ยระบบเวนจูรี่ (Venturi Fertilizer Injector) อาศัยหลักการความแตกต่างของแรงดัน ($\Delta P$) ในการดูดปุ๋ย แรงดันฝั่งออกของเวนจูรี่ต้องต่ำกว่าฝั่งเข้าประมาณกี่เปอร์เซ็นต์จึงจะเริ่มเกิดแรงดูดสูญญากาศ?",
+        options: [
+          "5%",
+          "20% - 30%",
+          "80%",
+          "100%"
+        ],
+        answer: 1,
+        explanation: "ท่อเวนจูรี่อาศัยหลักการของ Bernoulli เมื่อน้ำไหลผ่านคอไกรที่แคบลง ความเร็วจะสูงขึ้นและแรงดันจะตกลง การเกิดแรงดูดปุ๋ยที่มีประสิทธิภาพต้องมี Differential Pressure ($\Delta P$) ฝั่งออกต่ำกว่าฝั่งเข้าประมาณ 20-30%"
+      },
+      {
+        id: 49,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "ในการคำนวณความต้องการน้ำของไม้ผลปลูกใหม่ (อายุ 1 ปี) ทรงพุ่มเล็ก การปรับค่าสัดส่วนการปกคลุมของทรงพุ่ม (Canopy Cover Crop Factor) ช่วยประหยัดน้ำได้อย่างไร?",
+        options: [
+          "คิดปริมาณน้ำเต็มพื้นที่ 100% เหมือนไม้ผลโตแล้ว",
+          "คำนวณคิดความต้องการน้ำเฉพาะตามพื้นที่ทรงพุ่มจริงที่ร่มเงาตกกระทบดิน ทำให้ประหยัดน้ำและพลังงานได้มากกว่า 70%",
+          "งดให้น้ำจนกว่าต้นอายุครบ 3 ปี",
+          "ใช้น้ำมากกว่าต้นโต 2 เท่า"
+        ],
+        answer: 1,
+        explanation: "ไม้ผลปลูกใหม่มีพื้นที่พุ่มใบเล็กมาก การคำนวณน้ำคิดตาม Canopy Cover Percentage (เช่น ทรงพุ่มปกคลุม 10% ของพื้นที่) จะให้น้ำเฉพาะเขตรากพืช ช่วยประหยัดน้ำและพลังงานสูบน้ำได้มหาศาลเทียบกับต้นโตเต็มวัย"
+      },
+      {
+        id: 50,
+        cat: "cat2",
+        catName: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน",
+        question: "สัญลักษณ์มาตรฐานในแบบสเก็ตช์ระบบน้ำ รูปสัญลักษณ์ 'วงกลมมีตัวอักษร AV อยู่ภายใน' ติดตั้ง ณ จุดสูงสุดของท่อประธาน หมายถึงอุปกรณ์ใด?",
+        options: [
+          "Angle Valve (วาล์วมุม)",
+          "Air Release Valve (วาล์วระบายอากาศ)",
+          "Anti-Vortex Plate",
+          "Automatic Water Meter"
+        ],
+        answer: 1,
+        explanation: "สัญลักษณ์ AV บนแบบแปลนวิศวกรรมระบบน้ำเกษตร ย่อมาจาก Air Release Valve (วาล์วไล่อากาศ/วาล์วแอร์) ทำหน้าที่ไล่อากาศออกจากท่อ ณ จุดสูงสุดเพื่อป้องกันทางน้ำอุดตันจากถุงลม"
+      },
+
+      // ---------- CATEGORY 3: คำนวณปั๊ม-ท่อ-กราฟ (51-75) ----------
+      {
+        id: 51,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "คำนวณ Friction Head Loss ในท่อ PVC ขนาด ID = 100 มม. ความยาว $L = 500\text{ เมตร}$ อัตราการไหล $Q = 50\text{ m}^3\text{/hr}$ ($C = 150$) โดยสมการ Hazen-Williams ค่าสูญเสียแรงดันเนื่องความเสียดทานมีค่าประมาณกี่เมตร?",
+        options: [
+          "approx 2.5 เมตร",
+          "approx 8.5 เมตร",
+          "approx 25.0 เมตร",
+          "approx 85.0 เมตร"
+        ],
+        answer: 1,
+        explanation: "ใช้สมการ Hazen-Williams: $h_f = 10.67 \times L \times Q^{1.852} / (C^{1.852} \times D^{4.87})$\nแทนค่า $L=500, Q=0.01389\text{ m}^3\text;/s, C=150, D=0.10\text{ m}$\nได้ผลลัพธ์ $h_f \approx 8.5\text{ เมตร}$ (หรือประมาณ 0.85 bar)"
+      },
+      {
+        id: 52,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "การคิดคำนวณความสูญเสียแรงดันในข้อต่อและวาล์ว (Fitting Losses) โดยวิธีความยาวท่อเทียบเท่า (Equivalent Pipe Length) ข้องอ 90 องศา PVC ขนาด 3 นิ้ว 1 ตัว มีค่าเทียบเท่าความยาวท่อตรงประมาณกี่เมตร?",
+        options: [
+          "0.1 เมตร",
+          "2.2 - 2.5 เมตร",
+          "15.0 เมตร",
+          "50.0 เมตร"
+        ],
+        answer: 1,
+        explanation: "ตามมาตรฐานคู่มือไฮดรอลิกส์ ข้องอมาตรฐาน 90 องศา ขนาด 3 นิ้ว (DN 80) จะสร้างความต้านทานการไหลเทียบเท่ากับท่อ PVC ตรงยาวประมาณ $2.2 - 2.5\text{ เมตร}$"
+      },
+      {
+        id: 53,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "ระบบน้ำสปริงเกอร์มีข้อมูลความสูงสแตติกฝั่งดูด $h_{s} = 4\text{ m}$, ความสูงสแตติกฝั่งส่ง $h_{d} = 12\text{ m}$, Friction Loss รวมในท่อดูดและส่ง $h_f = 14\text{ m}$, แรงดันใช้งานที่หัวสปริงเกอร์ปลายสายต้องการ $P_{operating} = 2.5\text{ bar}$ ($25\text{ m}$) จงคำนวณเฮดรวมของระบบ (Total Dynamic Head - TDH) ที่ปั๊มต้องทำได้?",
+        options: [
+          "30 เมตร",
+          "43 เมตร",
+          "55 เมตร",
+          "80 เมตร"
+        ],
+        answer: 2,
+        explanation: "สูตร $\text{TDH} = h_{s} + h_{d} + h_f + h_{operating} = 4 + 12 + 14 + 25 = 55\text{ เมตร}$ (หรือแรงดันปั๊ม 5.5 bar)"
+      },
+      {
+        id: 54,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "กฎความคล้ายคลึงของปั๊มเหวี่ยง (Affinity Laws) หากเราปรับเพิ่มความเร็วรอบมอเตอร์ ($N$) ขึ้น 20% (จาก 2,900 RPM เป็น 3,480 RPM) อัตราการไหล ($Q$) และเฮด ($H$) ของปั๊มจะเปลี่ยนแปลงอย่างไร?",
+        options: [
+          "$Q$ เพิ่มขึ้น 20%, $H$ เพิ่มขึ้น 44% ($1.2^2$)",
+          "$Q$ เพิ่มขึ้น 20%, $H$ เพิ่มขึ้น 20%",
+          "$Q$ เท่าเดิม, $H$ เพิ่มขึ้น 100%",
+          "$Q$ และ $H$ ลดลงทั้งคู่"
+        ],
+        answer: 0,
+        explanation: "ตามปั๊ม Affinity Laws:\n1) $Q_2/Q_1 = N_2/N_1 = 1.20 \implies Q$ เพิ่มขึ้น 20%\n2) $H_2/H_1 = (N_2/N_1)^2 = (1.20)^2 = 1.44 \implies H$ เพิ่มขึ้น 44%\n3) Power $P_2/P_1 = (N_2/N_1)^3 = 1.728 \implies P$ เพิ่มขึ้น 72.8%"
+      },
+      {
+        id: 55,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "การกลึงลดขนาดใบพัดปั๊ม (Impeller Trimming) จากเส้นผ่านศูนย์กลาง 200 มม. เหลือ 180 มม. (ลดลง 10%) จะส่งผลต่อกำลังไฟฟ้าที่มอเตอร์ต้องใช้ (Brake Horsepower) อย่างไร?",
+        options: [
+          "กำลังไฟฟ้าเพิ่มขึ้น 10%",
+          "กำลังไฟฟ้าลดลงประมาณ 27.1% (ตามสัดส่วน $D^3 \implies 0.9^3 = 0.729$)",
+          "กำลังไฟฟ้าเท่าเดิม",
+          "มอเตอร์จะไหม้ทันที"
+        ],
+        answer: 1,
+        explanation: "กำลังไฟฟ้าของปั๊มแปรผันตามกำลังสามของเส้นผ่านศูนย์กลางใบพัด ($P \propto D^3$) ดังนั้นเมื่อลดขนาดใบพัดลงเหลือ 0.9 เท่า กำลังไฟฟ้าจะลดลงเหลือ $0.9^3 = 0.729$ เท่า หรือลดลงไปประมาณ 27.1%"
+      },
+      {
+        id: 56,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "จุดทำงานประสิทธิภาพสูงสุดของปั๊ม (Best Efficiency Point - BEP) บนกราฟปั๊มน้ำคือจุดใด และควรกำหนดจุดทำงานจริง (Operating Point) ไว้อย่างไร?",
+        options: [
+          "จุดที่ปั๊มทำแรงดันได้สูงสุด (Shut-off Head)",
+          "จุดที่เส้นโค้งประสิทธิภาพ ($\eta$) สูงสุด; ควรเลือกจุดทำงานจริงให้อยู่ในช่วง 80% - 110% ของ BEP",
+          "จุดที่อัตราการไหลเป็นศูนย์",
+          "จุดใดก็ได้บนกราฟ ไม่มีความแตกต่างกัน"
+        ],
+        answer: 1,
+        explanation: "จุด BEP คือจุดที่ปั๊มเปลี่ยนพลังงานกลเป็นพลังงาน гиดรอลิกได้อย่างมีประสิทธิภาพสูงสุด รัศมีแรงต้านและแรงสั่นสะเทือนในตัวปั๊มต่ำที่สุด ควรออกแบบให้จุดทำงานจริง (Duty Point) อยู่ใกล้เคียง BEP มากที่สุด"
+      },
+      {
+        id: 57,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "หากต้องการส่งน้ำขึ้นภูเขาสูง 120 เมตร อัตราการไหล 15 คิว/ชั่วโมง ควรเลือกปั๊มประเภทใดจึงจะเหมาะสมและมีประสิทธิภาพไฮดรอลิกส์ดีที่สุด?",
+        options: [
+          "ปั๊มดิสเพลสเมนต์ชนิดเฟือง",
+          "ปั๊มหอยโข่งหลายใบพัด (Multistage Centrifugal Pump)",
+          "ปั๊มจมน้ำสำหรับน้ำเสีย (Sewage Submersible Pump)",
+          "ปั๊มหอยโข่งใบพัดเดียวขนาด 10 แรงม้า"
+        ],
+        answer: 1,
+        explanation: "งานที่ต้องการ Head สูงมาก ($> 80 - 100\text{ m}$) แต่อัตราการไหลปานกลาง ปั๊มหอยโข่งหลายใบพัด (Multistage Pump) เหมาะสมที่สุด เพราะแต่ละใบพัดจะช่วยเพิ่ม Head อนุกรมสะสมขึ้นไปโดยไม่ต้องใช้ใบพัดขนาดใหญ่ยักษ์"
+      },
+      {
+        id: 58,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "การคำนวณหาค่า $NPSH_a$ (Net Positive Suction Head Available) ฝั่งท่อดูด ใช้สมการ $NPSH_a = H_{atm} - h_{s} - h_{fs} - H_{v}$ หากติดตั้งปั๊มบนพื้นที่สูงกว่าระดับน้ำทะเลปานกลาง 1,000 เมตร ข้อใดถูกต้อง?",
+        options: [
+          "ความกดอากาศ $H_{atm}$ จะลดลง ทำให้ค่า $NPSH_a$ ลดลง เสี่ยงต่อ Cavitation ง่ายขึ้นกว่าระดับน้ำทะเล",
+          "ความกดอากาศเพิ่มขึ้น ทำให้สูบน้ำได้ลึกขึ้น",
+          "พื้นที่สูงไม่มีผลกระทบต่อปั๊มน้ำ",
+          "อุณหภูมิน้ำไม่มีผลต่อค่าความดันไอ $H_v$"
+        ],
+        answer: 0,
+        explanation: "เมื่อระดับความสูงเพิ่มขึ้น ความกดอากาศบรรยากาศ ($H_{atm}$) จะลดลง (จาก 10.33 ม. ที่ระดับน้ำทะเล ลดลงเหลือประมาณ 9.0 ม. ที่ความสูง 1,000 ม.) ส่งผลให้ค่า $NPSH_a$ ลดลง ทำให้ระยะดูดลึกสูงสุดของปั๊มลดลงตามไปด้วย"
+      },
+      {
+        id: 59,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "อาการใดต่อไปนี้เป็นสัญญาณเตือนเด่นชัดที่สุดว่าปั๊มหอยโข่งกำลังเกิดปรากฏการณ์ Cavitation (การโพรงอากาศ)?",
+        options: [
+          "มีเสียงดังเหมือนมีกรวดทรายระเบิดกระแทกอยู่ภายในเสื้อปั๊ม และอัตราการไหลแกว่งตกตกตก",
+          "ตัวมอเตอร์เย็นลงผิดปกติ",
+          "แรงดันฝั่งส่งสูงขึ้นเป็น 2 เท่าทันที",
+          "ท่อส่งน้ำสั่นแต่ไม่มีเสียง"
+        ],
+        answer: 0,
+        explanation: "อาการ Cavitation เกิดจากฟองอากาศยุบตัวระเบิด (Implosion) ด้วยความเร็วและแรงดันมหาศาล กระแทกใส่ใบพัด เกิดเสียงดังป๊อกๆ แกร๊กๆ เหมือนมีหินกรวดวิ่งชนข้างในตัวปั๊ม พร้อมส่งผลให้ Head และ Flow ตกลงทันที"
+      },
+      {
+        id: 60,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "การนำปั๊มหอยโข่งสเปกเดียวกัน 2 ตัว มาต่อแบบขนาน (Parallel Operation) ในระบบท่อส่งน้ำประธานเดิม จะได้ผลลัพธ์ทางไฮดรอลิกส์อย่างไร?",
+        options: [
+          "ได้อัตราการไหล ($Q$) เพิ่มขึ้นเป็น 2 เท่า (200%) เสมอโดยแรงดันเท่าเดิม",
+          "อัตราการไหล ($Q$) รวมจะเพิ่มขึ้นแต่ไม่ถึง 2 เท่า (ประมาณ 150-180%) เนื่องจาก System Curve มีความต้านทานเพิ่มขึ้นตาม $Q^2$",
+          "แรงดัน ($H$) เพิ่มขึ้นเป็น 2 เท่า แต่อัตราการไหลเท่าเดิม",
+          "ปั๊มทั้งสองตัวจะแย่งน้ำกันจนไม่มีน้ำไหล"
+        ],
+        answer: 1,
+        explanation: "เมื่อต่อปั๊มขนานกัน $Q$ รวมจะเพิ่มขึ้น แต่เพราะ System Head Curve ของท่อแปรผันตาม $Q^2$ เมื่ออัตราการไหลเพิ่มขึ้น Friction Loss ในท่อเดิมจะสูงขึ้น ทำให้จุดตัดใหม่ได้ $Q$ รวมไม่ถึง 200% (นอกจากจะขยายขนาดท่อประธานรองรับ)"
+      },
+      {
+        id: 61,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "การต่อปั๊มหอยโข่งแบบอนุกรม (Series Operation) เหมาะสมที่จะใช้ในสถานการณ์ใด?",
+        options: [
+          "เมื่อต้องการปริมาณน้ำ ($Q$) มหาศาลในท่อขนาดใหญ่",
+          "เมื่อต้องการเพิ่มแรงดัน (Head) รวมของระบบขึ้นเป็นสองเท่า สำหรับส่งน้ำขึ้นที่สูงมากๆ หรือระบบที่ Friction Loss สูงมาก",
+          "เมื่อต้องการประหยัดค่าไฟฟ้าลงครึ่งหนึ่ง",
+          "เมื่อท่อฝั่งดูดมีขนาดเล็กกว่าท่อฝั่งส่ง"
+        ],
+        answer: 1,
+        explanation: "การต่อปั๊มแบบอนุกรม (น้ำจากปั๊มตัวที่ 1 พุ่งเข้าทางดูดปั๊มตัวที่ 2) จะช่วยบวกสะสม Head ($H_{total} = H_1 + H_2$) โดยที่อัตราการไหล $Q$ เท่าเดิม เหมาะสำหรับการเพิ่มแรงดันส่งขึ้นเนินเขาสูง"
+      },
+      {
+        id: 62,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "คำนวณการเพิ่มขึ้นของแรงดันกระแทก Water Hammer ($\Delta P$) ตามสมการ Joukowsky ($\Delta P = \rho \cdot a \cdot \Delta v$) เมื่อน้ำมีความเร็วการไหลในท่อ $v = 2.0\text{ m/s}$ ความเร็วคลื่นเสียงในน้ำในท่อ PVC $a = 400\text{ m/s}$ ความหนาแน่นน้ำ $\rho = 1,000\text{ kg/m}^3$ หากปิดวาล์วฉับพลัน แรงดันจะกระแทกเพิ่มขึ้นเท่าใด?",
+        options: [
+          "80,000 Pa (0.8 bar)",
+          "800,000 Pa (8.0 bar)",
+          "8,000,000 Pa (80.0 bar)",
+          "0 Pa"
+        ],
+        answer: 1,
+        explanation: "แทนค่าในสูตร Joukowsky:\n$\Delta P = 1,000 \times 400 \times 2.0 = 800,000\text{ Pa} = 8.0\text{ bar}$\nนั่นคือแรงดันในท่อจะพุ่งสูงขึ้นฉับพลันอีก 8.0 bar เหนือแรงดันใช้งานปกติ ซึ่งสามารถทำให้ท่อ PVC แตกกระจายได้"
+      },
+      {
+        id: 63,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "คำนวณกำลังไฟฟ้าเพลาปั๊ม (Water Horsepower / Brake Power) ที่ต้องการ สำหรับปั๊มที่ต้องการ $Q = 60\text{ m}^3\text;/hr$ ($0.0167\text{ m}^3\text;/s$), $\text{TDH} = 40\text{ m}$, ประสิทธิภาพปั๊ม $\eta_{pump} = 70\%$ ($0.70$): ($P_{kW} = \frac{\gamma \cdot Q \cdot H}{1000 \cdot \eta_{pump}}$)",
+        options: [
+          "3.5 kW",
+          "9.33 kW",
+          "25.0 kW",
+          "50.0 kW"
+        ],
+        answer: 1,
+        explanation: "สูตรคำนวณกำลังเพลา $P (kW) = \frac{9.81 \times Q (\text{m}^3\text;/s) \times H (\text{m})}{\eta_{pump}} = \frac{9.81 \times 0.01667 \times 40}{0.70} \approx 9.33\text{ kW}$ (หรือประมาณ 12.5 แรงม้า)"
+      },
+      {
+        id: 64,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "การติดตั้งอินเวอร์เตอร์ดักจับความถี่ (Variable Frequency Drive - VFD) คุมมอเตอร์ปั๊มน้ำ ให้ประหยัดพลังงาน จะควบคุมมอเตอร์อย่างไรเมื่อเปิดรดน้ำเพียง 1 โซน (ต้องการ Flow น้อยลง)?",
+        options: [
+          "VFD จะลดความถี่ไฟฟ้า (Hz) ทำให้รอบมอเตอร์หมุนช้าลง ลดแรงดันส่วนเกิน และลดการกินกระแสไฟฟ้าตาม Affinity Law ($P \propto N^3$)",
+          "VFD จะเพิ่มความเร็วรอบมอเตอร์ขึ้นเป็น 2 เท่าเพื่ออัดแรงดัน",
+          "VFD ทำหน้าที่ตัดไฟมอเตอร์ทันที",
+          "VFD เปลี่ยนไฟฟ้ากระแสสลับเป็นกระแสตรงเพื่อชาร์จแบตเตอรี่"
+        ],
+        answer: 0,
+        explanation: "เมื่อต้องการ Flow น้อยลง VFD จะลดความถี่ (เช่น จาก 50Hz เหลือ 40Hz) ทำให้รอบหมุนลดลง เนื่องจากกำลังไฟฟ้าลดลงตามกำลังสามของรอบหมุน ($P \propto N^3$) การลดรอบลงเพียงเล็กน้อยจึงช่วยประหยัดค่าไฟได้อย่างมหาศาล"
+      },
+      {
+        id: 65,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "ช่วงความเร็วการไหลของน้ำในท่อประธาน (Mainline Velocity) ที่เหมาะสมและปลอดภัยที่สุดตามหลักวิศวกรรมชลประทานท่อพลาสติกคือช่วงใด?",
+        options: [
+          "0.1 - 0.3 เมตร/วินาที",
+          "1.0 - 2.0 เมตร/วินาที (ไม่ควรเกิน 2.5 m/s)",
+          "5.0 - 10.0 เมตร/วินาที",
+          "ความเร็วเท่าใดก็ได้"
+        ],
+        answer: 1,
+        explanation: "ความเร็วต่ำกว่า 0.6 m/s จะเกิดการตกตะกอนในท่อ ส่วนความเร็วสูงเกิน 2.0 - 2.5 m/s จะทำให้เกิด Friction Loss สูงมาก และเสี่ยงต่อแรงดันค้อนน้ำ (Water Hammer) รุนแรงเมื่อปิดวาล์ว"
+      },
+      {
+        id: 66,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "หลักการขนาดท่อที่คุ้มค่าทางเศรษฐศาสตร์ที่สุด (Economic Pipe Sizing) คือการหาจุดสมดุลระหว่างปัจจัยใด?",
+        options: [
+          "เงินงบประมาณซื้อท่อ กับ สีของท่อ",
+          "เงินลงทุนค่าท่อ (Capital Cost - ท่อใหญ่ราคาแพง) กับ ค่าใช้จ่ายพลังงานไฟฟ้าสูบน้ำตลอดอายุการใช้งาน (Operating Cost - ท่อใหญ่ Friction ต่ำ ค่าไฟถูก)",
+          "น้ำหนักท่อ กับ ความยาวรถขนส่ง",
+          "จำนวนวาล์ว กับ จำนวนสปริงเกอร์"
+        ],
+        answer: 1,
+        explanation: "Economic Pipe Size คือการวิเคราะห์คุ้มทุนระหว่าง 1) ค่าท่อ (ท่อใหญ่ลงทุนสูง) และ 2) ค่าไฟสูบน้ำ (ท่อใหญ่ Friction น้อย ค่าไฟต่ำ) เพื่อหาขนาดท่อที่ผลรวมค่าใช้จ่ายตลอดอายุโครงการ (Life Cycle Cost) ต่ำที่สุด"
+      },
+      {
+        id: 67,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "กฎพื้นฐานในการเลือกขนาดท่อดูด (Suction Pipe) ของปั๊มหอยโข่ง เมื่อเทียบกับขนาดรูทางดูดของตัวปั๊ม (Pump Suction Nozzle) คืออะไร?",
+        options: [
+          "ท่อดูดต้องมีขนาดเล็กกว่ารูปั๊ม 1 ขนาดเสมอ",
+          "ท่อดูดควรมีขนาดใหญ่กว่ารูทางดูดของปั๊มอย่างน้อย 1 ขนาด (เช่น รูปั๊ม 2 นิ้ว ใช้ท่อดูด 2.5 หรือ 3 นิ้ว) และเดินท่อสโลปเอียงขึ้นหาปั๊ม",
+          "ใช้ท่อขนาดใดก็ได้ตามที่มีในร้าน",
+          "ต้องต่อท่อดูดเป็นคอสะพานโค้งขึ้นสูงๆ ก่อนเข้าปั๊ม"
+        ],
+        answer: 1,
+        explanation: "เพื่อลด Friction Loss ฝั่งดูด ป้องกันการเกิด Cavitation และป้องกันถุงลมขัง ท่อดูดควรขยายใหญ่กว่ารูทางดูดปั๊ม 1 ขนาดเสมอ และใช้ข้อลดเบี้ยว (Eccentric Reducer) โดยให้ขอบบนท่อเรียบตรงเสมอ"
+      },
+      {
+        id: 68,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "จุดทำงานของปั๊มน้ำในระบบ (System Operating Point) เกิดขึ้น ณ ตำแหน่งใดบนกราฟไฮดรอลิกส์?",
+        options: [
+          "จุดที่เส้นกราฟสมรรถนะปั๊ม (Pump Performance Curve: Q-H) ตัดกับเส้นกราฟความต้านทานของระบบท่อ (System Head Curve)",
+          "จุดที่เส้นกำลังไฟฟ้าตัดกับเส้นแกน X",
+          "จุดสูงสุดของเส้นกราฟปั๊มเสมอ",
+          "จุดที่สปริงเกอร์หัวสุดท้ายหลุด"
+        ],
+        answer: 0,
+        explanation: "จุดทำงานจริง (Operating Point) คือจุดตัดระหว่างเส้น Pump Curve (สมรรถนะปั๊มในการสร้าง Head ที่ Q ต่างๆ) กับเส้น System Head Curve (ความต้องการ Head รวมของระบบท่อที่ Q ต่างๆ)"
+      },
+      {
+        id: 69,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "ปั๊มหอยโข่งแบบล่อน้ำด้วยตัวเอง (Self-Priming Pump) สามารถสูบน้ำในสภาพที่มีอากาศในท่อดูดได้ด้วยกลไกใด และระยะดูดลึกสูงสุดเชิงทฤษฎีอยู่ที่กี่เมตร?",
+        options: [
+          "ผสมอากาศกับน้ำในห้องปั๊มเพื่อแยกอากาศออกทางฝั่งส่ง; ระยะดูดลึกสูงสุดไม่เกิน 6 - 8 เมตร",
+          "ใช้ลูกสูบอัดอากาศ; ดูดลึกได้ 50 เมตร",
+          "ใช้สุญญากาศจากมอเตอร์; ดูดลึกได้ 100 เมตร",
+          "ไม่ต้องใช้น้ำในห้องปั๊มเลย"
+        ],
+        answer: 0,
+        explanation: "ปั๊ม Self-priming มีห้องเก็บน้ำสำรองในตัวปั๊มเพื่อหมุนเวียนน้ำมาผสมกับอากาศ วิ่งไปแยกอากาศออกที่ช่องส่ง จนเกิดสุญญากาศในท่อดูด แต่เนื่องจากข้อจำกัดความกดอากาศ ($10.33\text{ m}$) ระยะดูดใช้งานจริงจึงไม่เกิน 6-8 เมตร"
+      },
+      {
+        id: 70,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "ปั๊มบาดาลจมน้ำ (Submersible Deep Well Pump) หากนำไปติดตั้งสูบน้ำในสระเปิด ต้องติดอุปกรณ์เสริมใดเพื่อป้องกันมอเตอร์ไหม้จากความร้อน?",
+        options: [
+          "พัดลมระบายอากาศ",
+          "ปลอกระบายความร้อน (Flow Inducer Sleeve / Cooling Shroud) เพื่อบังคับให้น้ำไหลผ่านระบายความร้อนตัวมอเตอร์ก่อนเข้าทางดูด",
+          "แผงโซลาร์เซลล์",
+          "เชือกไนลอนผูกมอเตอร์"
+        ],
+        answer: 1,
+        explanation: "มอเตอร์ปั๊มบาดาลใช้น้ำที่ไหลผ่านผิวเสื้อมอเตอร์ในการระบายความร้อน ในบ่อบาดาลแคบทิศทางน้ำถูกบังคับให้ไหลผ่านตัวมอเตอร์ แต่ในสระเปิดน้ำกระจายกว้าง จึงต้องใส่ Cooling Shroud เพื่อบังคับให้น้ำวิ่งผ่านระบายความร้อนมอเตอร์ก่อน"
+      },
+      {
+        id: 71,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "ท่อ PE กับ ท่อ PVC ที่ขนาดเส้นผ่านศูนย์กลางภายใน (ID) และอัตราการไหลเท่ากัน ท่อชนิดใดมีค่าความเสียดทาน (Friction Loss) ต่ำกว่า และเพราะเหตุใด?",
+        options: [
+          "ท่อ PE ต่ำกว่า เพราะมีความยืดหยุ่นสูงกว่า",
+          "ท่อ PVC ต่ำกว่าเล็กน้อยเนื่องจากผนังราบเรียบแข็งไม่งอสะบัด แต่ในทางปฏิบัติคิดค่า $C=150$ ใกล้เคียงกันมาก",
+          "ท่อ PE มี Friction สูงกว่า 10 เท่า",
+          "ท่อ PVC มีความเสียดทานมากกว่าท่อเหล็ก"
+        ],
+        answer: 1,
+        explanation: "ท่อพลาสติกทั้ง PVC และ PE มีความราบเรียบของผนังท่อสูงมาก (Smooth pipe) โดย PVC จะมีความคงรูปแนวดิ่งดีกว่า ทำให้ค่า $C$-value อยู่ช่วง 150 เท่ากัน จึงมีความเสียดทานใกล้เคียงกันมากเมื่อ ID เท่ากัน"
+      },
+      {
+        id: 72,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "ค่า Service Factor (SF = 1.15) บนป้ายชื่อมอเตอร์ปั๊มน้ำ (Nameplate) หมายความว่าอย่างไร?",
+        options: [
+          "มอเตอร์สามารถรับภาระโหลดเกินกำลังระบุได้อีก 15% เป็นครั้งคราวโดยที่ขดลวดไม่เสียหาย",
+          "มอเตอร์ประหยัดไฟขึ้น 15%",
+          "มอเตอร์หมุนเร็วขึ้น 15%",
+          "รับประกันยาวนานขึ้น 15 เดือน"
+        ],
+        answer: 0,
+        explanation: "Service Factor (SF) คือค่าตัวคูณภาระเกินกำลังอย่างปลอดภัย มอเตอร์ที่มี SF 1.15 สามารถขับโหลดเกินกำลังพีคได้สูงกว่าพาวเวอร์ระบุ 15% ชั่วคราวโดยอุณหภูมิขดลวดไม่สูงเกินขีดจำกัดฉนวน"
+      },
+      {
+        id: 73,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "การสตาร์ทมอเตอร์ปั๊มน้ำขนาดใหญ่ (เช่น 20 แรงม้าขึ้นไป) แบบสตาร์-เดลต้า (Star-Delta Starter) มีวัตถุประสงค์หลักเพื่ออะไร?",
+        options: [
+          "ลดกระแสไฟกระชากขณะสตาร์ท (Inrush Starting Current) ลงเหลือประมาณ 1/3 ของแบบ Direct On Line (DOL)",
+          "เพิ่มแรงบิดในการหมุนปั๊มเป็น 3 เท่า",
+          "ทำให้ปั๊มหมุนกลับทางได้",
+          "ปรับความเร็วรอบมอเตอร์ตามแรงดันน้ำ"
+        ],
+        answer: 0,
+        explanation: "การสตาร์ทแบบ DOL มอเตอร์จะดึงกระแสสูงถึง 6-8 เท่าของกระแสพิกัด ทำให้แรงดันไฟฟ้าตกในระบบ การสตาร์ทแบบ Star-Delta จะช่วยลดแรงดันและลดกระแสสตาร์ทลงเหลือประมาณ 33% (1/3) ช่วยปกป้องระบบไฟฟ้า"
+      },
+      {
+        id: 74,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "เฮดปิดวาล์ว (Shut-off Head) ของปั๊มหอยโข่ง หมายถึงจุดใดบนกราฟปั๊ม?",
+        options: [
+          "เฮดแรงดันสูงสุดที่ปั๊มสร้างได้ ณ อัตราการไหล $Q = 0$ (ปิดวาล์วทางส่ง)",
+          "เฮด ณ จุดปั๊มพังทลาย",
+          "เฮด ณ จุดอัตราการไหลสูงสุด",
+          "แรงดันฝั่งทางดูด"
+        ],
+        answer: 0,
+        explanation: "Shut-off Head คือแรงดันดิบสูงสุดที่ปั๊มหมุนสร้างขึ้นได้เมื่อปิดวาล์วฝั่งทางส่งทั้งหมด ($Q = 0$) เป็นค่าสำคัญในการเช็กระดับการทนแรงดันของท่อและข้อต่อว่าจะไม่แตกเมื่อมีการปิดวาล์วฉับพลัน"
+      },
+      {
+        id: 75,
+        cat: "cat3",
+        catName: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม",
+        question: "หากเราเปลี่ยนท่อส่งน้ำประธานจากท่อ PVC 3 นิ้ว เส้นเดียว เป็นการขนานท่อ PVC 3 นิ้ว เป็น 2 เส้นคู่กัน (ขนานท่อ) ค่า Friction Loss ในระบบส่งน้ำจะลดลงเหลือประมาณเท่าใดของท่อเดิม?",
+        options: [
+          "ลดลงเหลือประมาณ 25% (หรือ 1/4) ของความเสียดทานเดิม",
+          "ลดลงเหลือ 50%",
+          "เท่าเดิม",
+          "เพิ่มขึ้น 2 เท่า"
+        ],
+        answer: 0,
+        explanation: "เมื่อเดินท่อคู่ขนาน อัตราการไหลในแต่ละเส้นจะลดลงครึ่งหนึ่ง ($Q/2$) จากสมการ Friction Loss แปรรูปตาม $Q^{1.852} \approx Q^2$ ดังนั้น $(1/2)^2 = 1/4$ หรือประมาณ 25% ของค่าเดิม"
+      },
+
+      // ---------- CATEGORY 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ (76-100) ----------
+      {
+        id: 76,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "วาล์วลดแรงดันชนิดควบคุมด้วยนักบินไฮดรอลิก (Pilot-Operated Pressure Reducing Valve - PRV) ทำหน้าที่รักษาแรงดันอย่างไรในระบบน้ำเกษตร?",
+        options: [
+          "คุมแรงดันฝั่งเข้า (Upstream) ให้คงที่เสมอ",
+          "คุมและปรับลดแรงดันฝั่งออก (Downstream) ให้คงที่ตามค่าที่ตั้งไว้ ไม่ว่าแรงดันฝั่งเข้าหรือการเปลี่ยนแปลงการไหลจะเปลี่ยนไปอย่างไร",
+          "ปิดน้ำทันทีเมื่อมีฝนตก",
+          "กรองขวดพลาสติกออกจากท่อ"
+        ],
+        answer: 1,
+        explanation: "Hydraulic PRV ปรับลดแรงดันด้านท้ายวาล์ว (Downstream Pressure) ให้คงที่สม่ำเสมอตามค่าที่ตั้งไว้ที่ Pilot ช่วยป้องกันท่อและหัวสปริงเกอร์ฝั่งปลายสายแตกจากแรงดันส่วนเกิน"
+      },
+      {
+        id: 77,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "วาล์วไล่อากาศผสมชนิด Combination Air Valve มีฟังก์ชันการทำงานประสานกัน 3 อย่าง ข้อใดถูกต้องที่สุด?",
+        options: [
+          "ไล่อากาศก้อนใหญ่ขณะเติมน้ำเข้าท่อ, ดึงอากาศเข้าท่อป้องกันสุญญากาศขณะระบายน้ำทิ้ง, และปล่อยฟองอากาศเล็กๆ ขณะระบบทำงานภายใต้แรงดัน",
+          "ปรับแรงดันน้ำ, กรองตะกอน, และจ่ายปุ๋ย",
+          "เปิดน้ำ, ปิดน้ำ, และตั้งเวลา",
+          "วัดอัตราการไหล, วัดอุณหภูมิ, และวัดค่า pH"
+        ],
+        answer: 0,
+        explanation: "Combination Air Valve รวมคุณสมบัติ 1) Large orifice release (ไล่อากาศก้อนโตตอนเติมน้ำ) 2) Vacuum break (เติมอากาศป้องกันท่อยุบตอนสูบน้ำออก) และ 3) Small orifice release (ไล่ฟองอากาศสะสมขณะมีแรงดัน)"
+      },
+      {
+        id: 78,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "โซลินอยด์วาล์วแบบ DC Latching Solenoid (9-12VDC) มีข้อได้เปรียบเด่นชัดข้อใดเมื่อเทียบกับ AC Solenoid (24VAC) ในระบบให้น้ำอัตโนมัติ?",
+        options: [
+          "ทนต่อแรงดันน้ำได้ 100 bar",
+          "ใช้พลังงานไฟฟ้าเฉพาะช่วงจังหวะส่งสัญญาณพัลส์เปิดและปิดวาล์วเท่านั้น ทำให้ประหยัดไฟสูง เหมาะกับตู้คุมถ่านกล่อง/โซลาร์เซลล์",
+          "ไม่ต้องใช้ยางไดอะแฟรมภายใน",
+          "ราคาถูกกว่าวาล์วธรรมดา 10 เท่า"
+        ],
+        answer: 1,
+        explanation: "DC Latching Solenoid อาศัยแม่เหล็กถาวรยึดตำแหน่งวาล์ว ใช้กระแสไฟจากแบตเตอรี่จ่ายพัลส์สั้นๆ เฉพาะตอนเปลี่ยนสถานะ 'เปิด' หรือ 'ปิด' เท่านั้น ไม่กินไฟค้างไว้ตลอดเวลาเหมือน AC Solenoid"
+      },
+      {
+        id: 79,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "เครื่องกรองแยกทรายแบบไฮโดรไซโคลน (Hydrocyclone Sand Separator) ใช้หลักการทางกายภาพใดในการแยกทรายและกรวดออกจากน้ำสระ/น้ำบาดาล?",
+        options: [
+          "ใช้ตาข่ายกรองสแตนเลสความละเอียด 1,000 Mesh",
+          "ใช้วงเหวี่ยงแรงเข้าสู่ศูนย์กลาง (Centrifugal / Vortex force) ดันกรวดทรายที่มีความหนาแน่นสูงตกกลิ้งลงสู่ถังดักตะกอนล่าง",
+          "ใช้สารเคมีตกตะกอน alum",
+          "ใช้สนามแม่เหล็กดูดทราย"
+        ],
+        answer: 1,
+        explanation: "Hydrocyclone อัดน้ำเข้าหมุนเป็นกระแสหมุนวน (Vortex) ด้วยความเร็วสูงภายในทรงกรวย แรงเหวี่ยงเหวี่ยงอนุภาคทรายและกรวดหนักตกเหวี่ยงชิดผนังและหล่นลงถังเก็บตะกอน (Dirt Chamber) ด้านล่าง"
+      },
+      {
+        id: 80,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "หากน้ำจากสระเกษตรมีปัญหาตะไคร่น้ำ สารอินทรีย์ และอินทรียวัตถุเบาลอยปนมาเป็นจำนวนมาก ระบบกรองชนิดใดมีความสามารถในการกรองและล้างขจัดสารอินทรีย์ได้ดีที่สุด?",
+        options: [
+          "กรองตะแกรงสแตนเลส (Screen Filter)",
+          "กรองทรายอุตสาหกรรม (Media / Sand Filter) หรือ กรองดิสก์ล้างอัตโนมัติ (Automatic Disc Filter)",
+          "กรองกระดาษคาร์บอน",
+          "ไม่ต้องใส่กรอง"
+        ],
+        answer: 1,
+        explanation: "สารอินทรีย์และตะไคร่น้ำมีลักษณะนิ่ม ยืดหยุ่น สามารถถูกแรงดันอัดทะลุรูตะแกรง (Screen Filter) ได้ง่าย กรองทราย (Media Filter) และกรองดิสก์ (Disc Filter) จึงเหมาะที่สุดในการดักจับสารอินทรีย์เชิงลึก"
+      },
+      {
+        id: 81,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "เกณฑ์การสั่งเริ่มกระบวนการล้างขจัดสิ่งสกปรกย้อนกลับ (Backwash Cycle) ของชุดกรองน้ำอัตโนมัติ คืออะไร?",
+        options: [
+          "เมื่อความต่างของแรงดันระหว่างฝั่งเข้าและฝั่งออก ($\Delta P$) สูงถึง 0.5 bar (7.2 psi) หรือตามระยะเวลาคุม (Time Interval)",
+          "เมื่ออุณหภูมิน้ำสูงเกิน 50°C",
+          "เมื่อระดับน้ำในสระลดลง",
+          "เมื่อไม่มีไฟเลี้ยง"
+        ],
+        answer: 0,
+        explanation: "เมื่อไส้กรองเริ่มอุดตัน ความต้านทานจะสูงขึ้น ส่งผลให้ความต่างแรงดันฝั่งเข้า-ออก ($\Delta P = P_{in} - P_{out}$) เพิ่มขึ้น เมื่อถึงค่าเซ็ตพอยต์ $0.5\text{ bar}$ สวิตช์ $\Delta P$ จะสั่งงานตู้ควบคุมเริ่มล้าง Backwash ทันที"
+      },
+      {
+        id: 82,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "วาล์วบายพาสระบายแรงดันเกิน (Pressure Relief Valve) ติดตั้งไว้บริเวณท่อส่งหน้าปั๊ม เพื่อวัตถุประสงค์ใด?",
+        options: [
+          "ระบายน้ำทิ้งเปิดออกทันทีเมื่อแรงดันในท่อพุ่งสูงเกินค่าความปลอดภัยที่ตั้งไว้ ป้องกันท่อประธานและอุปกรณ์แตกหัก",
+          "ช่วยเพิ่มแรงดันน้ำในระบบอีก 2 bar",
+          "กรองสนิมเหล็กออกจากน้ำ",
+          "ผสมปุ๋ยเคมีอัตโนมัติ"
+        ],
+        answer: 0,
+        explanation: "Pressure Relief Valve ปรับตั้งค่าแรงดันป้องภัย (เช่น 6.0 bar) เมื่อเกิด Water Hammer หรือมีการปิดวาล์วฉับพลันในระบบ วาล์วจะเปิดบายพาสระบายน้ำทิ้งทันทีเพื่อจำกัดแรงดันไม่ให้เกินเกณฑ์ท่อแตก"
+      },
+      {
+        id: 83,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "เซ็นเซอร์วัดความชื้นในดินชนิดวัดค่าความต้านทานไดอิเล็กตริก (FDR / TDR Soil Moisture Sensor) ประยุกต์ใช้ในตู้ควบคุมระบบน้ำอัตโนมัติอย่างไร?",
+        options: [
+          "ส่งสัญญาณสั่งระงับการเปิดวาล์วรดน้ำเมื่อความชื้นในดินยังอยู่ในระดับความจุอุ้มน้ำสูงสุด (Field Capacity)",
+          "ใช้วัดปริมาณปุ๋ยไนโตรเจนอย่างเดียว",
+          "ใช้ควบคุมความเร็วรอบของเครื่องตัดหญ้า",
+          "ทำให้รากพืชดูดน้ำได้เร็วขึ้น"
+        ],
+        answer: 0,
+        explanation: "เซ็นเซอร์ความชื้นในดินวัดเปอร์เซ็นต์น้ำในเขตรากพืชจริง หากค่าความชื้นในดินยังสูงกว่าระดับที่ต้องให้น้ำ ตู้ควบคุมจะสั่งงดการรดน้ำ (Irrigation Bypass) ช่วยประหยัดน้ำและป้องกันรากเน่า"
+      },
+      {
+        id: 84,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "เทคโนโลยีสื่อสารไร้สาย LoRaWAN (Long Range Wide Area Network) เหมาะสมอย่างยิ่งสำหรับระบบควบคุมน้ำเกษตรในแปลงขนาดใหญ่ (>100 ไร่) ด้วยจุดเด่นข้อใด?",
+        options: [
+          "ส่งข้อมูลวิดีโอความละเอียด 4K ได้",
+          "ระยะส่งสัญญาณไกลหลายกิโลเมตร กินพลังงานต่ำมาก แบตเตอรี่อยู่ได้นานหลายปี โดยไม่ต้องง้อซิมการ์ดอินเทอร์เน็ตทุกจุด",
+          "ราคาอุปกรณ์ฟรี",
+          "ไม่ต้องใช้สายอากาศ"
+        ],
+        answer: 1,
+        explanation: "LoRaWAN เป็นคลื่นวิทยุความถี่ต่ำ ส่งสัญญาณได้ไกล 2 - 10 กม. ทะลุสิ่งกีดขวางในแปลงเกษตร ใช้พลังงานต่ำมาก (Low Power) เหมาะกับการเชื่อมต่อวาล์วและเซ็นเซอร์โหนดไกลๆ เข้าสู่ Gateway กลาง"
+      },
+      {
+        id: 85,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "มิเตอร์วัดน้ำแบบใบพัดแทรกในท่อ (Woltman Turbine Water Meter) เหมาะสมสำหรับการวัดปริมาณน้ำในท่อประธานเกษตรขนาดใหญ่ (3 นิ้วขึ้นไป) เหนือกว่าแบบ Multi-jet อย่างไร?",
+        options: [
+          "สร้าง Head Loss ต่ำมาก รองรับอัตราการไหล $Q$ สูงๆ ได้ดี และทนต่อเศษตะกอนขนาดเล็กได้ดีกว่า",
+          "ไม่ต้องใช้น้ำไหลผ่านก็วัดได้",
+          "ราคาถูกกว่ามิเตอร์พลาสติก 1/2 นิ้ว",
+          "วัดค่าน้ำหนักปุ๋ยได้ด้วย"
+        ],
+        answer: 0,
+        explanation: "มิเตอร์ชนิด Woltman มีแกนใบพัดวางขนานตามแนวการไหลของท่อ ทำให้ช่องทางน้ำเปิดกว้าง สร้าง Head Loss ต่ำมาก สามารถวัดอัตราการไหลปริมาณมหาศาลในท่อประธานใหญ่ได้แม่นยำ"
+      },
+      {
+        id: 86,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "วาล์วควบคุมไฮดรอลิกพร้อมลูกลอย (Modulating Float Control Valve) ติดตั้งที่ปากถังพักน้ำเกษตร ทำหน้าที่อย่างไร?",
+        options: [
+          "เปิดน้ำเข้าถังเต็มกำลัง และจะค่อยๆ ชะลอเปิด-ปิดตามระดับลูกลอยเพื่อรักษาระดับน้ำในถังให้คงที่โดยไม่เกิดแรงดันกระแทก",
+          "สูบน้ำออกจากถังอัตโนมัติ",
+          "ต้มน้ำในถังให้ร้อน",
+          "เติมอากาศเข้าถังน้ำ"
+        ],
+        answer: 0,
+        explanation: "Float Pilot Hydraulically Controlled Valve คุมการเปิด-ปิดแผ่นไดอะแฟรมวาล์วหลักตามการยึดของลูกลอย เมื่อน้ำใกล้เต็มถัง วาล์วจะค่อยๆ ปิดนุ่มนวล ป้องกันปัญหา Water Hammer ในท่อส่ง"
+      },
+
+      {
+        id: 87,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "โซลินอยด์วาล์วไฮดรอลิกส์แบบทำงานทางอ้อม (Indirect Pilot-Operated Solenoid Valve) ต้องการสิ่งใดจึงจะสามารถเปิด-ปิดแผ่นยางไดอะแฟรมได้สมบูรณ์?",
+        options: [
+          "แรงดันน้ำต่างระดับขั้นต่ำ ($\Delta P_{min} \ge 0.3 - 0.5\text{ bar}$) ในระบบเพื่อช่วยดันแผ่นไดอะแฟรมให้ยกเปิด",
+          "ต้องใช้แรงคนช่วยหมุนด้วยมือเสมอ",
+          "ต้องการแรงดันอากาศจากปั๊มลม外部",
+          "ทำงานได้เฉพาะเมื่อแรงดันเป็นศูนย์"
+        ],
+        answer: 0,
+        explanation: "โซลินอยด์วาล์วแบบ Pilot-operated เกษตร ไม่ได้ใช้แรงสนามแม่เหล็กยกแผ่นยางตรงๆ แต่ใช้คอยล์เปิดรูนักบินเล็กๆ แล้วใช้อภินิหารแรงดันน้ำในท่อ ($\Delta P \ge 0.3-0.5\text{ bar}$) ยกแผ่นไดอะแฟรมขึ้น"
+      },
+      {
+        id: 88,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "วาล์วเปลี่ยนทิศทางการไหลอัตโนมัติ 3 ทาง (3-Way Hydraulic Backwash Valve) ในระบบกรองน้ำดิสก์ ทำหน้าที่อย่างไรในจังหวะล้าง Backwash?",
+        options: [
+          "ปิดทางน้ำเข้าจากปั๊ม และเปิดเปลี่ยนทิศทางให้น้ำสะอาดที่กรองแล้วไหลย้อนกลับออกทางท่อระบายตะกอน (Drain)",
+          "ตัดกระแสไฟฟ้าทั้งหมดในสวน",
+          "เพิ่มขนาดรูดิสก์ให้ใหญ่ขึ้น 10 เท่า",
+          "สูบน้ำจากสระทิ้งทั้งหมด"
+        ],
+        answer: 0,
+        explanation: "3-Way Backwash Valve สลับทิศทางไหลภายใน โดยปิดทางน้ำดิบเข้ากรอง และเปิดทางให้น้ำสะอาดจากกรองข้างเคียงไหลย้อนกลับ (Reverse Flow) เข้าฉีดล้างแผ่นดิสก์ แล้วพัดตะกอนออกทางท่อระบายทิ้ง"
+      },
+      {
+        id: 89,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "เซ็นเซอร์วัดน้ำฝน (Rain Sensor) แบบแผ่นดิสก์ดูดซับความชื้น (Hygroscopic Discs) ทำงานสั่งหยุดระบบรดน้ำอย่างไรเมื่อมีฝนตกหนัก?",
+        options: [
+          "แผ่นดิสก์จะซับน้ำฝนขยายตัวดันทริกเกอร์สวิตช์ตัดวงจรไฟฟ้าคุมวาล์ว และเมื่อฝนหยุดแผ่นดิสก์แห้งลงจะคืนรูปต่อวงจรตามปกติ",
+          "ใช้ตราชั่งน้ำหนักน้ำฝน",
+          "ส่งสัญญาณดาวเทียมไปที่กรมอุตุนิยมวิทยา",
+          "ใช้การวัดแสงแดด"
+        ],
+        answer: 0,
+        explanation: "แผ่นวงกลมสังเคราะห์ Hygroscopic แช่น้ำฝนจะพองตัวขยายขนาดอย่างรวดเร็วไปกดสวิตช์ตัดวงจร (Normally Closed switch เปิดออก) หยุดการทำงานของวาล์วรดน้ำ และเมื่ออากาศแห้งมันจะหดตัวกลับมาต่อวงจรตามปกติ"
+      },
+      {
+        id: 90,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "ตำแหน่งใดต่อไปนี้ตามแนวท่อส่งน้ำประธาน ที่จำเป็นต้องติดตั้งวาล์วไล่อากาศ (Air Release Valve) มากที่สุด?",
+        options: [
+          "จุดสูงสุดของเนินเขา/แนวท่อ (High Points), หลังปั๊มน้ำ, หลังชุดวาล์วลดแรงดัน และทุกๆ ระยะ 500 เมตรบนท่อราบยาว",
+          "จุดลึกที่สุดใต้ดิน",
+          "ปลายหัวสปริงเกอร์ทุกหัว",
+          "ภายในตัวถังปั๊มน้ำ"
+        ],
+        answer: 0,
+        explanation: "วาล์วแอร์ต้องติดตั้ง ณ จุดที่มีโอกาสสะสมมวลอากาศมากที่สุด ได้แก่ จุดยอดสันเนิน (High Points) ของแนวท่อ, ทางออกปั๊ม, จุดเปลี่ยนความสโลป และจุดเกลี่ยระบายบนท่อราบยาวทุกๆ 500-800 เมตร"
+      },
+      {
+        id: 91,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "การเลือกขนาดรูกรองดิสก์ (Disc Filter Mesh Size) สำหรับระบบมินิสปริงเกอร์กนกโปรดักส์ ขนาดรูฉีด 1.5 มม. ควรเลือกใช้กรองความละเอียดเท่าใดจึงจะสมดุล ไม่รุดเร็วเกินไป?",
+        options: [
+          "80 Mesh (180 Micron) ถึง 100 Mesh (150 Micron)",
+          "1,000 Mesh",
+          "10 Mesh",
+          "ไม่ต้องใส่กรอง"
+        ],
+        answer: 0,
+        explanation: "รูฉีดมินิสปริงเกอร์ (1.5 มม.) มีขนาดใหญ่กว่าหัวน้ำหยดมาก การใช้กรอง 80-100 Mesh เพียงพอในการดักจับกรวดทรายไม่ให้อุดรูฉีด โดยไม่สร้าง Head Loss สะสมเร็วเกินไปเหมือนกรองถี่จัด"
+      },
+      {
+        id: 92,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "ปั๊มตวงจ่ายสารเคมี/ปุ๋ย (Diaphragm Metering Dosing Pump) มีข้อดีเด่นกว่าระบบเวนจูรี่ในการให้ปุ๋ยอัตโนมัติอย่างไร?",
+        options: [
+          "จ่ายปุ๋ยได้อย่างแม่นยำสูงสม่ำเสมอ ไม่ขึ้นกับแรงดันและอัตราการไหลในท่อประธาน และสามารถเชื่อมต่อคุมค่า EC/pH ปุ๋ยได้อัตโนมัติ",
+          "ไม่ต้องใช้พลังงานไฟฟ้า",
+          "ราคาถูกกว่าเวนจูรี่ 5 เท่า",
+          "ช่วยเพิ่มแรงดันน้ำสปริงเกอร์"
+        ],
+        answer: 0,
+        explanation: "Dosing Pump เป็นปั๊มชนิด Positive Displacement จ่ายอัตราสารละลายปุ๋ยได้แม่นยำสูงมากตามจังหวะชัก (Stroke) สามารถสลายข้อจำกัดเรื่องแรงดันตกของเวนจูรี่ และคุมปุ๋ยอัตโนมัติตามค่า EC/pH ร่วมกับตู้ PLC"
+      },
+      {
+        id: 93,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "วาล์วรักษาแรงดันด้านหน้า (Pressure Sustaining Valve - PSV) ใช้แก้ปัญหาไฮดรอลิกส์ในกรณีใด?",
+        options: [
+          "รักษาระดับแรงดันฝั่งต้นน้ำ (Upstream) ไม่ให้ตกต่ำกว่าเกณฑ์ความปลอดภัย เพื่อป้องกันปั๊มสูญเสียแรงดันหรือแย่งน้ำกันในโซนสูง",
+          "ลดแรงดันฝั่งปลายสาย",
+          "วัดอุณหภูมิน้ำในท่อ",
+          "ป้องกันปุ๋ยตกตะกอน"
+        ],
+        answer: 0,
+        explanation: "Pressure Sustaining Valve (PSV) จะเปิดให้น้ำไหลผ่านได้ก็ต่อเมื่อแรงดันฝั่งเข้า (Upstream) สูงกว่าค่าที่ตั้งไว้ ช่วยรักษาแรงดันดันฝั่งปั๊มไม่ให้ตกร่วงเมื่อมีการเปิดวาล์วปลายสายพร้อมกัน"
+      },
+      {
+        id: 94,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "ตู้ควบคุมรดน้ำอัจฉริยะระบบ ET-based Smart Controller คำนวณระยะเวลาให้น้ำในแต่ละวันจากปัจจัยอุตุนิยมวิทยาใดบ้าง?",
+        options: [
+          "ความเข้มแสงแดด, อุณหภูมิ, ความชื้นสัมพัทธ์ในอากาศ, ความเร็วลม และปริมาณน้ำฝน",
+          "ราคาปุ๋ยเคมีในตลาด",
+          "ระดับน้ำทะเลปานกลาง",
+          "จำนวนพนักงาน PC ในสาขา"
+        ],
+        answer: 0,
+        explanation: "Smart Controller แบบ ET อาศัยสมการ Penman-Monteith ดึงข้อมูลสภาพอากาศ (ความเข้มแสง อุณหภูมิ ความชื้น ลม ฝน) มาคำนวณหาค่า $ET_c$ ปรับเวลาเปิด-ปิดวาล์วรดน้ำให้ตรงตามความต้องการจริงพืชทุกวัน"
+      },
+      {
+        id: 95,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "การป้องกันปัญหาการปิดกระแทกของเช็ควาล์ว (Check Valve Slam) ที่เกิดเมื่อหยุดปั๊มส่งน้ำขึ้นที่สูง สามารถแก้ไขได้อย่างไร?",
+        options: [
+          "ใช้เช็ควาล์วชนิดปิดเร็วด้วยสปริง (No-Slam / Silent Check Valve) หรือวาล์วเช็คหน่วงเวลาปิดด้วยไฮดรอลิก (Slow Closing Check Valve)",
+          "ถอดเช็ควาล์วทิ้ง",
+          "เจาะรูท่อส่งน้ำให้รั่ว",
+          "เพิ่มความเร็วรอบปั๊มเป็น 2 เท่าตอนดับเครื่อง"
+        ],
+        answer: 0,
+        explanation: "Check Valve Slam เกิดจากน้ำย้อนกลับตบลิ้นวาล์วปิดเสียงดังสนั่นและเกิดคลื่น Water Hammer แก้ไขโดยใช้ Silent Check Valve ที่มีสปริงดันลิ้นปิดล่วงหน้าก่อนกระแสน้ำจะหยุด หรือใช้ Hydraulic Slow-closing valve"
+      },
+      {
+        id: 96,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "สวิตช์ตรวจจับการไหล (Flow Switch) และ สวิตช์แรงดัน (Pressure Switch) นำมาต่ออนุกรมในตู้ควบคุมปั๊มน้ำ เพื่อป้องกันภัย (Protection) เรื่องใด?",
+        options: [
+          "ป้องกันปั๊มหมุนแห้งไร้น้ำ (Dry-Run Protection) และป้องกันการรันปั๊มอัดท่ออุดตันจนห้องปั๊มระเบิด",
+          "ป้องกันขโมยตัดสายไฟ",
+          "ป้องกันปุ๋ยบูด",
+          "ป้องกันแสงแดดเลียตัวปั๊ม"
+        ],
+        answer: 0,
+        explanation: "Flow Switch และ Pressure Switch เป็นอุปกรณ์ Safety Interlock หากสูบแล้วไม่มีน้ำไหลผ่าน (Dry-run) หรือแรงดันพุ่งสูงผิดปกติจากท่ออุดตัน ตู้ควบคุมจะสั่งตัดการทำงานปั๊มทันทีเพื่อป้องกันซีลและใบพัดพังเสียหาย"
+      },
+      {
+        id: 97,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "เซ็นเซอร์ส่งสัญญาณแรงดันชนิดอนาล็อก 4-20 mA (Pressure Transmitter) มีข้อได้เปรียบเหนือนพอยต์สวิตช์แรงดัน (Pressure Switch On/Off) ธรรมดาอย่างไรในการคุมปั๊ม VFD?",
+        options: [
+          "สามารถส่งค่าแรงดันเป็นตัวเลขละเอียดต่อเนื่องแบบ Real-time ให้ VFD คำนวณ PID Loop ปรับความเร็วรอบมอเตอร์อย่างนุ่มนวลตลอดเวลา",
+          "ราคาถูกกว่า 10 เท่า",
+          "ไม่ต้องต่อสายไฟ",
+          "ทนกระแสไฟ 380V ได้ตรงๆ"
+        ],
+        answer: 0,
+        explanation: "Pressure Transmitter สื่อสารค่าแรงดันละเอียดต่อเนื่อง (เช่น 0-10 bar เป็นสัญญาณ 4-20mA) ทำให้ VFD นำค่าไปคำนวณระบบควบคุมวงปิด PID Loop ปรับรอบปั๊มรักษาแรงดันน้ำในท่อได้นิ่งสนิท"
+      },
+      {
+        id: 98,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "อุปกรณ์โอเวอร์โหลดรีเลย์ (Thermal Overload Relay) ในตู้ควบคุมปั๊มน้ำ 3 เฟส ป้องกันมอเตอร์ไหม้จากสาเหตุใด?",
+        options: [
+          "ป้องกันกระแสไฟฟ้าเกินพิกัดต่อเนื่อง (Overcurrent) และภาวะไฟฟ้าขาดเฟส (Phase Loss / Phase Failure)",
+          "ป้องกันฟ้าผ่า",
+          "ป้องกันน้ำท่วมตู้คุม",
+          "ป้องกันแรงดันน้ำตกลง"
+        ],
+        answer: 0,
+        explanation: "Thermal Overload Relay ตรวจจับความร้อนสะสมจากการดึงกระแสเกินกินพิกัดของมอเตอร์ปั๊ม หรือเมื่อไฟฟ้าไฟตก/กระแสขาดไป 1 เฟส (Single Phasing) รีเลย์จะตัดวงจรแมกเนติกคอนแทกเตอร์ทันทีก่อนขดลวดมอเตอร์ไหม้"
+      },
+      {
+        id: 99,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "การคำนวณขนาดวาล์วดูดอากาศเข้าท่อ (Vacuum Breaker Air Valve) เพื่อป้องกันท่อ PVC/PE ยุบตัวขณะเปิดวาล์วระบายน้ำทิ้งฉับพลัน ต้องพิจารณาจากปัจจัยใด?",
+        options: [
+          "อัตราการไหลของการระบายน้ำทิ้งสูงสุด ($Q_{drain}$) และค่าแรงดันดูดสุญญากาศสูงสุดที่ท่อทนได้โดยไม่บี้ยุบตัว (Collapse Pressure)",
+          "ยี่ห้อพัดลมโรงเรือน",
+          "ความยาวสายไฟตู้คุม",
+          "สีของท่อ PE"
+        ],
+        answer: 0,
+        explanation: "ขณะระบายน้ำออกฉับพลัน น้ำที่ไหลออกจะดึงอากาศเข้าแทนที่ หากวาล์วเติมอากาศเล็กเกินไป อากาศเข้าไม่ทัน ความดันในท่อจะติดลบ ต่ำกว่า Collapse Pressure ของท่อ ทำให้ท่อพลาสติกถูกความกดอากาศภายนอกบีบยุบแบน"
+      },
+      {
+        id: 100,
+        cat: "cat4",
+        catName: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ",
+        question: "ถังจ่ายปุ๋ยแบบแรงดันต่าง (Differential Pressure Fertilizer Tank) เมื่อเปรียบเทียบกับชุดเวนจูรี่ฉีดปุ๋ย มีข้อดีและข้อเสียอย่างไร?",
+        options: [
+          "ข้อดี: ไม่สร้าง Head Loss ในท่อประธานมาก; ข้อเสีย: ความเข้มข้นปุ๋ยจะเจือจางลงเรื่อยๆ ตามเวลาที่ผ่านไป ไม่คงที่เหมือนเวนจูรี่หรือ Dosing pump",
+          "ข้อดี: ราคาถูกกว่า; ข้อเสีย: ไม่สามารถใส่ปุ๋ยน้ำได้",
+          "ข้อดี: ไม่ต้องใช้น้ำ; ข้อเสีย: ถังหนักมาก",
+          "ทั้งสองระบบเหมือนกันทุกประการ"
+        ],
+        answer: 0,
+        explanation: "ถังปุ๋ยแรงดันต่าง (Fertilizer Tank) ต่อบายพาสแบ่งน้ำเข้าถังเพียงเล็กน้อย จึงสร้าง Head Loss ต่ำมาก แต่มีจุดอ่อนคือปุ๋ยในถังจะถูกน้ำใหม่แทนที่เจือจางลงเรื่อยๆ ($C = C_0 \cdot e^{-kt}$) ความเข้มข้นปุ๋ยจะไม่คงที่ตลอดช่วงการให้"
+      }
+    ];
+
+    // EXAM STATE
+    let examQuestions = [];
+    let userAnswers = {};
+    let flaggedQuestions = new Set();
+    let currentQIndex = 0;
+    let examTimerInterval = null;
+    let timeRemaining = 3600; // 60 mins
+
+    // TAB SWITCHING logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-emerald-600', 'text-emerald-700');
+        btn.classList.add('border-transparent', 'text-slate-500');
+      });
+
+      document.getElementById(tabId).classList.remove('hidden');
+      const activeBtn = document.getElementById('nav-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('border-transparent', 'text-slate-500');
+        activeBtn.classList.add('border-emerald-600', 'text-emerald-700');
+      }
+
+      if (tabId === 'bank-tab') {
+        renderQuestionBank();
+      }
+    }
+
+    // SHUFFLE ARRAY (Fisher-Yates)
+    function shuffle(array) {
+      let m = array.length, t, i;
+      let copy = [...array];
+      while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = copy[m];
+        copy[m] = copy[i];
+        copy[i] = t;
+      }
+      return copy;
+    }
+
+    // START EXAM (Random 50 questions)
+    function startExam() {
+      examQuestions = shuffle(questionBank).slice(0, 50);
+      userAnswers = {};
+      flaggedQuestions.clear();
+      currentQIndex = 0;
+      timeRemaining = 3600; // 60 mins
+
+      document.getElementById('exam-start-card').classList.add('hidden');
+      document.getElementById('exam-result-ui').classList.add('hidden');
+      document.getElementById('exam-active-ui').classList.remove('hidden');
+
+      renderPalette();
+      loadQuestion(0);
+      startTimer();
+    }
+
+    // TIMER
+    function startTimer() {
+      clearInterval(examTimerInterval);
+      examTimerInterval = setInterval(() => {
+        timeRemaining--;
+        let m = Math.floor(timeRemaining / 60);
+        let s = timeRemaining % 60;
+        document.getElementById('exam-timer').innerText = 
+          `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+        if (timeRemaining <= 0) {
+          clearInterval(examTimerInterval);
+          alert('หมดเวลาในการทำข้อสอบ ระบบจะทำการส่งข้อสอบอัตโนมัติ');
+          submitExam();
+        }
+      }, 1000);
+    }
+
+    // LOAD QUESTION INTO EXAM UI
+    function loadQuestion(index) {
+      currentQIndex = index;
+      const q = examQuestions[index];
+
+      document.getElementById('current-cat-badge').innerText = q.catName;
+      document.getElementById('current-q-title').innerText = `ข้อที่ ${index + 1} / 50`;
+      document.getElementById('q-text').innerText = q.question;
+
+      // Render Options
+      const optContainer = document.getElementById('q-options');
+      optContainer.innerHTML = '';
+
+      q.options.forEach((optText, optIdx) => {
+        const isSelected = userAnswers[index] === optIdx;
+        const btn = document.createElement('div');
+        btn.className = `p-4 rounded-xl border text-sm font-medium cursor-pointer transition flex items-start gap-3 ${
+          isSelected 
+            ? 'bg-emerald-50 border-emerald-600 text-emerald-900 shadow-sm' 
+            : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-700'
+        }`;
+        btn.onclick = () => selectOption(index, optIdx);
+
+        const choiceChar = String.fromCharCode(65 + optIdx);
+        btn.innerHTML = `
+          <div class="w-6 h-6 rounded-full border ${isSelected ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-slate-300 text-slate-500'} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            ${choiceChar}
+          </div>
+          <div class="leading-relaxed flex-grow">${optText}</div>
+        `;
+        optContainer.appendChild(btn);
+      });
+
+      // Update palette & flag button
+      updatePaletteUI();
+      const isFlagged = flaggedQuestions.has(index);
+      const flagBtn = document.getElementById('btn-flag');
+      if (isFlagged) {
+        flagBtn.className = 'px-4 py-2 bg-amber-400 text-slate-900 rounded-lg font-medium text-sm transition';
+      } else {
+        flagBtn.className = 'px-4 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg font-medium text-sm transition';
+      }
+
+      // Disable/Enable Nav buttons
+      document.getElementById('btn-prev').disabled = index === 0;
+      document.getElementById('btn-next').disabled = index === 49;
+    }
+
+    function selectOption(qIdx, optIdx) {
+      userAnswers[qIdx] = optIdx;
+      loadQuestion(qIdx);
+    }
+
+    function toggleFlag() {
+      if (flaggedQuestions.has(currentQIndex)) {
+        flaggedQuestions.delete(currentQIndex);
+      } else {
+        flaggedQuestions.add(currentQIndex);
+      }
+      loadQuestion(currentQIndex);
+    }
+
+    function prevQuestion() {
+      if (currentQIndex > 0) loadQuestion(currentQIndex - 1);
+    }
+
+    function nextQuestion() {
+      if (currentQIndex < 49) loadQuestion(currentQIndex + 1);
+    }
+
+    // PALETTE UI
+    function renderPalette() {
+      const palContainer = document.getElementById('q-palette');
+      palContainer.innerHTML = '';
+      for (let i = 0; i < 50; i++) {
+        const btn = document.createElement('button');
+        btn.id = `pal-btn-${i}`;
+        btn.onclick = () => loadQuestion(i);
+        btn.className = 'h-9 w-full rounded-lg text-xs font-bold transition flex items-center justify-center border';
+        btn.innerText = i + 1;
+        palContainer.appendChild(btn);
+      }
+      updatePaletteUI();
+    }
+
+    function updatePaletteUI() {
+      for (let i = 0; i < 50; i++) {
+        const btn = document.getElementById(`pal-btn-${i}`);
+        if (!btn) continue;
+
+        const isAnswered = userAnswers[i] !== undefined;
+        const isFlagged = flaggedQuestions.has(i);
+        const isCurrent = i === currentQIndex;
+
+        let bgClass = 'bg-slate-100 text-slate-600 border-slate-200';
+        if (isAnswered) bgClass = 'bg-emerald-600 text-white border-emerald-700';
+        if (isFlagged) bgClass = 'bg-amber-400 text-slate-900 border-amber-500';
+
+        let ringClass = isCurrent ? 'ring-2 ring-offset-1 ring-slate-800 font-extrabold' : '';
+
+        btn.className = `h-9 w-full rounded-lg text-xs font-bold transition flex items-center justify-center border ${bgClass} ${ringClass}`;
+      }
+    }
+
+    // CONFIRM SUBMIT
+    function confirmSubmitExam() {
+      const answeredCount = Object.keys(userAnswers).length;
+      if (answeredCount < 50) {
+        if (!confirm(`คุณยังทำข้อสอบไม่ครบ (ทำแล้ว ${answeredCount}/50 ข้อ) ต้องการส่งข้อสอบเลยหรือไม่?`)) {
+          return;
+        }
+      } else {
+        if (!confirm('ยืนยันการส่งข้อสอบประเมินผล?')) return;
+      }
+      submitExam();
+    }
+
+    // SUBMIT EXAM & CALCULATE RESULTS
+    function submitExam() {
+      clearInterval(examTimerInterval);
+
+      let correctCount = 0;
+      let catScores = {
+        cat1: { correct: 0, total: 0, name: "หมวดที่ 1: ท่อ อุปกรณ์ และสปริงเกอร์" },
+        cat2: { correct: 0, total: 0, name: "หมวดที่ 2: การออกแบบระบบน้ำ พืช และดิน" },
+        cat3: { correct: 0, total: 0, name: "หมวดที่ 3: การเลือกท่อ ปั๊ม และกราฟปั๊ม" },
+        cat4: { correct: 0, total: 0, name: "หมวดที่ 4: อุปกรณ์เสริม และวาล์วอัตโนมัติ" }
+      };
+
+      examQuestions.forEach((q, idx) => {
+        catScores[q.cat].total++;
+        if (userAnswers[idx] === q.answer) {
+          correctCount++;
+          catScores[q.cat].correct++;
+        }
+      });
+
+      const percentage = Math.round((correctCount / 50) * 100);
+
+      // Hide Exam, Show Result
+      document.getElementById('exam-active-ui').classList.add('hidden');
+      document.getElementById('exam-result-ui').classList.remove('hidden');
+
+      // Determine Badge Tier
+      const badgeEl = document.getElementById('res-badge');
+      const scoreText = document.getElementById('res-score-text');
+      const percentText = document.getElementById('res-percent-text');
+      const descText = document.getElementById('res-desc-text');
+
+      scoreText.innerText = `คะแนน ${correctCount} / 50`;
+      percentText.innerText = `(${percentage}%)`;
+
+      if (percentage >= 85) {
+        badgeEl.className = 'inline-block px-4 py-1.5 rounded-full text-sm font-bold bg-emerald-100 text-emerald-800 border border-emerald-300';
+        badgeEl.innerText = 'ระดับจัดกลุ่ม: Professional (ผู้เชี่ยวชาญวิศวกรรมระบบน้ำ)';
+        descText.innerText = 'พนักงานมีความรู้และทักษะความเข้าใจเชิงวิศวกรรมสูงมาก สามารถออกแบบระบบ ถอดแบบประมาณราคา อ่านกราฟปั๊ม และแก้ไขปัญหาระบบน้ำเกษตรขนาดใหญ่ได้อย่างแม่นยำ';
+      } else if (percentage >= 60) {
+        badgeEl.className = 'inline-block px-4 py-1.5 rounded-full text-sm font-bold bg-blue-100 text-blue-800 border border-blue-300';
+        badgeEl.innerText = 'ระดับจัดกลุ่ม: Advance (ระดับก้าวหน้า)';
+        descText.innerText = 'พนักงานมีความรู้พื้นฐานและหลักการออกแบบระบบน้ำได้เป็นอย่างดี สามารถแนะนำการเลือกใช้ปั๊มและท่อให้ลูกค้าได้อย่างถูกต้อง ควรเสริมการฝึกอบรมวาล์วไฮดรอลิกส์เชิงซ้อนเพิ่มเติม';
+      } else {
+        badgeEl.className = 'inline-block px-4 py-1.5 rounded-full text-sm font-bold bg-amber-100 text-amber-800 border border-amber-300';
+        badgeEl.innerText = 'ระดับจัดกลุ่ม: Starter / Beginner (ระดับเริ่มต้น)';
+        descText.innerText = 'พนักงานจำเป็นต้องได้รับการฝึกอบรมเพิ่มทักษะความรู้พื้นฐานผลิตภัณฑ์ ทฤษฎีไฮดรอลิกส์ และการเลือกขนาดท่อปั๊มเพิ่มเติมเพื่อเพิ่มความมั่นใจในการแนะนำลูกค้า';
+      }
+
+      // Render Category Breakdown Bars
+      const breakdownEl = document.getElementById('cat-breakdown');
+      breakdownEl.innerHTML = '';
+
+      Object.keys(catScores).forEach(catKey => {
+        const item = catScores[catKey];
+        const catPct = item.total > 0 ? Math.round((item.correct / item.total) * 100) : 0;
+
+        const card = document.createElement('div');
+        card.className = 'bg-slate-50 border border-slate-200 p-4 rounded-xl';
+        card.innerHTML = `
+          <div class="flex justify-between items-center text-xs font-bold text-slate-700 mb-1">
+            <span>${item.name}</span>
+            <span>${item.correct}/${item.total} (${catPct}%)</span>
+          </div>
+          <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+            <div class="bg-emerald-600 h-full rounded-full transition-all duration-500" style="width: ${catPct}%"></div>
+          </div>
+        `;
+        breakdownEl.appendChild(card);
+      });
+    }
+
+    function resetExam() {
+      document.getElementById('exam-result-ui').classList.add('hidden');
+      document.getElementById('exam-start-card').classList.remove('hidden');
+    }
+
+    // RENDER QUESTION BANK (100 QUESTIONS WITH DETAILED SOLUTIONS)
+    function renderQuestionBank() {
+      filterQuestionBank();
+    }
+
+    function filterQuestionBank() {
+      const searchVal = document.getElementById('bank-search').value.toLowerCase();
+      const catVal = document.getElementById('bank-cat-filter').value;
+      const listContainer = document.getElementById('question-bank-list');
+
+      listContainer.innerHTML = '';
+
+      const filtered = questionBank.filter(q => {
+        const matchCat = catVal === 'all' || q.cat === catVal;
+        const matchSearch = q.question.toLowerCase().includes(searchVal) || 
+                            q.explanation.toLowerCase().includes(searchVal) ||
+                            q.options.some(o => o.toLowerCase().includes(searchVal));
+        return matchCat && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        listContainer.innerHTML = `<div class="bg-white p-8 text-center text-slate-500 rounded-xl">ไม่พบข้อสอบที่ตรงกับคำค้นหา</div>`;
+        return;
+      }
+
+      filtered.forEach((q) => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-xl shadow-sm border border-slate-200 p-5 space-y-4';
+
+        let optionsHTML = '';
+        q.options.forEach((opt, idx) => {
+          const isCorrect = idx === q.answer;
+          const choiceChar = String.fromCharCode(65 + idx);
+          optionsHTML += `
+            <div class="p-3 rounded-lg text-sm flex items-start gap-3 ${isCorrect ? 'bg-emerald-50 border border-emerald-300 font-semibold text-emerald-900' : 'bg-slate-50 border border-slate-100 text-slate-700'}">
+              <span class="w-5 h-5 rounded-full ${isCorrect ? 'bg-emerald-600 text-white' : 'bg-slate-200 text-slate-600'} text-xs flex items-center justify-center font-bold shrink-0 mt-0.5">${choiceChar}</span>
+              <span class="leading-relaxed">${opt}</span>
+              ${isCorrect ? '<span class="ml-auto text-xs bg-emerald-600 text-white px-2 py-0.5 rounded font-bold">เฉลยถูกต้อง</span>' : ''}
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-2">
+            <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">ข้อที่ ${q.id} (${q.catName})</span>
+          </div>
+          <p class="font-semibold text-slate-800 text-base leading-relaxed">${q.question}</p>
+          <div class="space-y-2">${optionsHTML}</div>
+          <div class="bg-amber-50/60 border border-amber-200 rounded-lg p-3 text-xs text-slate-700 leading-relaxed">
+            <span class="font-bold text-amber-900"><i class="fa-solid fa-lightbulb text-amber-500 mr-1"></i> คำอธิบายและหลักการคำนวณทางวิศวกรรม:</span>
+            <p class="mt-1 whitespace-pre-line text-slate-700">${q.explanation}</p>
+          </div>
+        `;
+
+        listContainer.appendChild(card);
+      });
+    }
+
+    // Initialize Default Tab
+    window.addEventListener('DOMContentLoaded', () => {
+      switchTab('exam-tab');
+    });
+  </script>
+</body>
+</html>
